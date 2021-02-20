@@ -1,0 +1,15 @@
+.dark{
+    background-color: black;
+}
+
+.hero{
+    background: url(../img/leaves2.jpg);
+    background-repeat: no-repeat;
+    color: wheat;
+    /* filter: blur(32px);
+    -webkit-filter: blur(2px); */
+    height: 80vh;
+    border-radius: 5px;
+    margin: 25px;
+    padding: 10px;
+}

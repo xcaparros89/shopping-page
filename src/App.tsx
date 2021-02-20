@@ -6,19 +6,19 @@ import Login from "./components/Login";
 import Something from "./components/Something";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Container from 'react-bootstrap/Container';
 
 function App() {
   return (
-    <div className="App">
+    <Container fluid="xl">
     <Header />
     { <Switch>
       <Route exact path='/' component={Home} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/something' component={Something} />
     </Switch> }
-    <p>hi</p>
     <Footer />
-    </div>
+    </Container>
   );
 }
 
