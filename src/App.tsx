@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Something from "./components/Something";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Footer from "./components/footer";
 import Container from 'react-bootstrap/Container';
 
 function App() {
