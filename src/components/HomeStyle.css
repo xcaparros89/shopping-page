@@ -3,12 +3,11 @@
 }
 
 .hero{
-    background: url(../img/leaves2.jpg);
-    background-repeat: no-repeat;
+    /* background: url(../img/leaves2.jpg);
+    background-repeat: no-repeat; */
     color: wheat;
-    /* filter: blur(32px);
-    -webkit-filter: blur(2px); */
-    height: 80vh;
+    background-color: black;
+    height: 50vh;
     border-radius: 5px;
     margin: 25px;
     padding: 10px;

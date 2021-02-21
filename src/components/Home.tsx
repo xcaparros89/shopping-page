@@ -1,11 +1,13 @@
 import React, { ReactElement } from 'react'
 import Row from 'react-bootstrap/Row'
 import './HomeStyle.css';
+import PopularCarousel from './PopularCarousel';
 interface Props {
 }
 
 export default function Home({}: Props): ReactElement {
     return (
+        <>
         <Row className="hero">
             <p>Xavi's Garden</p>
             <div>
@@ -17,7 +19,8 @@ export default function Home({}: Props): ReactElement {
             <button>Outdoor Plants</button>
             <button>Indoor Plants</button>
             </div>
-            <p>Carrusel with popular plants</p>
         </Row>
+            <PopularCarousel />
+        </>
     )
 }
