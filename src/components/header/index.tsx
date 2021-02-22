@@ -8,9 +8,11 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import "./navbarStyle.css";
 
-interface Props {}
+interface Props {
+  categories: string[];
+}
 
-export default function Header({}: Props): ReactElement {
+export default function Header({ categories }: Props): ReactElement {
   return (
     <Navbar className="basicColors" expand="lg">
       <Navbar.Brand href="/">Xavi's garden</Navbar.Brand>
@@ -19,36 +21,22 @@ export default function Header({}: Props): ReactElement {
         <Nav className="mr-auto basicColors">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/login">Login</Nav.Link>
-          <NavDropdown
-            title="Categories"
-            id="dropdown-custom-1"
-            className="basicColors"
-          >
-            <NavDropdown.Item href="#action/on-sale" className="basicColors">
-              On sale
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/popular">Popular</NavDropdown.Item>
-            <NavDropdown.Item href="#action/new">New</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/outdoor">Outdoor</NavDropdown.Item>
-            <NavDropdown.Item href="#action/indoor">Indoor</NavDropdown.Item>
-            <NavDropdown.Item href="#action/fruits">Fruits</NavDropdown.Item>
-            <NavDropdown.Item href="#action/bonsais">Bonsais</NavDropdown.Item>
-          </NavDropdown>
+          <Dropdown>
+            <Dropdown.Toggle id="dropdown-custom">Categories</Dropdown.Toggle>
+            <Dropdown.Menu id="dropdown-custom">
+              <Dropdown.Item style={{color: 'rgba(0,0,0,.5)'}} href="/search/on-sale">On sale</Dropdown.Item>
+              <Dropdown.Item style={{color: 'rgba(0,0,0,.5)'}} href="/search/popular">Popular</Dropdown.Item>
+              <Dropdown.Item style={{color: 'rgba(0,0,0,.5)'}} href="/search/new">New</Dropdown.Item>
+              <Dropdown.Divider />
+              {categories.map((category) => (
+                <Dropdown.Item style={{color: 'rgba(0,0,0,.5)'}} href={`/search/${category}`}>
+                  {category}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
           <Nav.Link href="/customer-service">Customer service</Nav.Link>
         </Nav>
-        <Dropdown>
-          <Dropdown.Toggle id="dropdown-custom">Pow! Zoom!</Dropdown.Toggle>
-          <Dropdown.Menu  id="dropdown-custom">
-            <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-            <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-            <Dropdown.Item eventKey="3" active>
-              Active Item
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>{" "}
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-success">Search</Button>

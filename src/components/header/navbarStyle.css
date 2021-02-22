@@ -1,15 +1,20 @@
 #navbar{
     background-color:#00b894;
-    color: #81ecec;
+    color: rgba(0,0,0,.5);
 }
 
 .basicColors{
     background-color:#00b894;
-    color: #81ecec;
+    color: rgba(0,0,0,.5);
 }
 
 #dropdown-custom{
     background-color:#00b894;
-    color: #81ecec;
+    color: rgba(0,0,0,.5);
+    border: none;
 }
 
+#dropdown-item{
+    background-color:#00b894;
+    color: rgba(0,0,0,.5);
+}
