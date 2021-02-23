@@ -21,6 +21,7 @@ export default function Header({ categories }: Props): ReactElement {
         <Nav className="mr-auto basicColors">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/login">Login</Nav.Link>
+          <Nav.Link href="/search">Search</Nav.Link>
           <Dropdown>
             <Dropdown.Toggle id="dropdown-custom">Categories</Dropdown.Toggle>
             <Dropdown.Menu id="dropdown-custom">
