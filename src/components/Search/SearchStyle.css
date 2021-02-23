@@ -1,6 +1,7 @@
 .flowerListContainer{
     display:flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .flowerContainer{
@@ -11,4 +12,5 @@ width: 200px;
 height: 200px;
 text-align: center;
 color: white;
+margin: 5px;
 }
