@@ -7,7 +7,6 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import "./navbarStyle.css";
-
 interface Props {
   categories: string[];
 }

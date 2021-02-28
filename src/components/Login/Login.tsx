@@ -2,6 +2,7 @@ import React, { useEffect, useState, ReactElement } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './LoginStyle.css'
+import auth from '../../lib/auth'
 interface Props {}
 
 export default function Login({}: Props): ReactElement {
@@ -15,6 +16,7 @@ export default function Login({}: Props): ReactElement {
   let handleRegisterSubmit = (event:any) => {
     event.preventDefault();
     console.log(register);
+    auth.signup({username:'hola', email:register.email, password:register.password, adress:'sdfs'})
   };
 
   let handleLoginChange = (event:any) => {
