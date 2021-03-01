@@ -1,9 +1,8 @@
 import axios from "axios";
-import dotenv from "dotenv";
 
 class Auth {
-    // TODO change auth type
-    auth:any;
+  // TODO change auth type
+  auth: any;
   constructor() {
     this.auth = axios.create({
       baseURL: process.env.REACT_APP_API_URL,
@@ -11,13 +10,30 @@ class Auth {
     });
   }
 
-  signup({username, email, password, adress}:{  username: String,
-    email: String,
-    password: String,
-    adress: String,}) {
+  signup({
+    username,
+    email,
+    password,
+    address,
+    name,
+    surnames,
+    city,
+    state,
+    zip
+  }: {
+    username: string;
+    email: string;
+    password: string;
+    address: string;
+    name: string;
+    surnames: string;
+    city: string;
+    state: string;
+    zip: string;
+  }) {
     return this.auth
-      .post("/auth/signup", {username, email, password, adress})
-      .then(({ data }:any) => data);
+      .post("/auth/signup", { username, email, password, address, name, surnames, city, state, zip })
+      .then(({ data }: any) => data);
   }
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState, ReactElement } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './LoginStyle.css'
-import auth from '../../lib/auth'
+import RegisterForm from '../forms/RegisterForm';
 interface Props {}
 
 export default function Login({}: Props): ReactElement {
@@ -13,11 +13,7 @@ export default function Login({}: Props): ReactElement {
     event.preventDefault();
     console.log(login);
   };
-  let handleRegisterSubmit = (event:any) => {
-    event.preventDefault();
-    console.log(register);
-    auth.signup({username:'hola', email:register.email, password:register.password, adress:'sdfs'})
-  };
+
 
   let handleLoginChange = (event:any) => {
     const { name, value } = event.target;
@@ -55,27 +51,10 @@ export default function Login({}: Props): ReactElement {
           </Form>
         </div>
         <div className="form">
-          <h2>Register</h2>
-          <Form onSubmit={handleRegisterSubmit}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" name="email" placeholder="Enter email" onChange={handleRegisterChange}/>
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" name="password" placeholder="Password" onChange={handleRegisterChange} />
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Repeat password</Form.Label>
-              <Form.Control type="password" name="repeatPassword" placeholder="Password" onChange={handleRegisterChange}/>
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
+          
         </div>
       </div>
+      <RegisterForm />
     </div>
   );
 }
