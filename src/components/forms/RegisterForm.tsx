@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -9,6 +9,7 @@ import {RegisterValues} from '../../interfaces';
 import {registerSchema} from './validationForms';
 
 export default function RegisterForm({}: any): ReactElement {
+    let [error, setError] = useState({success:true, body:''})
             const initialValues: RegisterValues = {
               name: "",
               surnames: "",
@@ -22,9 +23,9 @@ export default function RegisterForm({}: any): ReactElement {
               zip: "",
               terms: false,
             };
-            let handleRegisterSubmit = (values: RegisterValues) => {
+            let handleRegisterSubmit = async (values: RegisterValues) => {
               console.log(values);
-              auth.signup({
+              const register = await auth.signup({
                 name: values.name,
                 surnames: values.surnames,
                 username: values.username,
@@ -35,6 +36,7 @@ export default function RegisterForm({}: any): ReactElement {
                 state: values.state,
                 zip: values.zip,
               });
+              setError(register);
             };
             return (
               <Formik
@@ -55,6 +57,9 @@ export default function RegisterForm({}: any): ReactElement {
                 }) => (
                   <>
                     <h2>Register</h2>
+                    {!error.success && 
+                        <p>{error.body}</p>
+                    }
                     <Form noValidate onSubmit={handleSubmit}>
                       <Form.Row>
                         <Form.Group as={Col} md="4" controlId="validationFormik01">
@@ -67,7 +72,7 @@ export default function RegisterForm({}: any): ReactElement {
                             isValid={touched.name && !errors.name}
                             isInvalid={!!errors.name}
                           />
-                          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                          <Form.Control.Feedback></Form.Control.Feedback>
                           <Form.Control.Feedback type="invalid">
                             {errors.name}
                           </Form.Control.Feedback>
@@ -83,7 +88,7 @@ export default function RegisterForm({}: any): ReactElement {
                             isInvalid={!!errors.surnames}
                           />
           
-                          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                          <Form.Control.Feedback></Form.Control.Feedback>
                           <Form.Control.Feedback type="invalid">
                             {errors.surnames}
                           </Form.Control.Feedback>
@@ -124,7 +129,7 @@ export default function RegisterForm({}: any): ReactElement {
                               isValid={touched.username && !errors.username}
                               isInvalid={!!errors.username}
                             />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback></Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">
                               {errors.username}
                             </Form.Control.Feedback>
@@ -179,7 +184,7 @@ export default function RegisterForm({}: any): ReactElement {
                             isValid={touched.address && !errors.address}
                             isInvalid={!!errors.address}
                           />
-                          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                          <Form.Control.Feedback></Form.Control.Feedback>
                           <Form.Control.Feedback type="invalid">
                             {errors.address}
                           </Form.Control.Feedback>
@@ -197,7 +202,7 @@ export default function RegisterForm({}: any): ReactElement {
                             isValid={touched.city && !errors.city}
                             isInvalid={!!errors.city}
                           />
-                          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                          <Form.Control.Feedback></Form.Control.Feedback>
                           <Form.Control.Feedback type="invalid">
                             {errors.city}
                           </Form.Control.Feedback>
@@ -213,7 +218,7 @@ export default function RegisterForm({}: any): ReactElement {
                             isValid={touched.state && !errors.state}
                             isInvalid={!!errors.state}
                           />
-                          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                          <Form.Control.Feedback></Form.Control.Feedback>
                           <Form.Control.Feedback type="invalid">
                             {errors.state}
                           </Form.Control.Feedback>
@@ -229,7 +234,7 @@ export default function RegisterForm({}: any): ReactElement {
                             isValid={touched.zip && !errors.zip}
                             isInvalid={!!errors.zip}
                           />
-                          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                          <Form.Control.Feedback></Form.Control.Feedback>
                           <Form.Control.Feedback type="invalid">
                             {errors.zip}
                           </Form.Control.Feedback>
