@@ -16,3 +16,7 @@ export const registerSchema = yup.object().shape({
     .required("Password confirm is required"),
   terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
 });
+export const loginSchema = yup.object().shape({
+  username: yup.string().required(),
+  password: yup.string().required()
+});

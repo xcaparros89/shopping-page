@@ -10,5 +10,9 @@ export interface RegisterValues {
     state: string;
     zip: string;
     terms: boolean;
+  };
+export interface LoginValues {
+    username: string;
+    password: string;
   }
   

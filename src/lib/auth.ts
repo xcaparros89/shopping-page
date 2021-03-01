@@ -35,6 +35,17 @@ class Auth {
       .post("/auth/signup", { username, email, password, address, name, surnames, city, state, zip })
       .then(({ data }: any) => data);
   }
+  login({
+    username,
+    password,
+  }: {
+    username: string;
+    password: string;
+  }) {
+    return this.auth
+      .post("/auth/login", { username, password})
+      .then(({ data }: any) => data);
+  }
 }
 
 const axiosRequestFunctions = new Auth();
