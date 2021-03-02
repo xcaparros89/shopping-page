@@ -8,8 +8,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Search from "./components/Search/Search";
 import Info from "./components/Info";
-import {ValidationSchemaExample} from "./components/formik";
 import Container from 'react-bootstrap/Container';
+import ItemForm from './components/forms/ItemForm'
 
 function App() {
   let categories=['fruits'];
@@ -21,7 +21,7 @@ function App() {
       <Route exact path='/login' component={Login} />
       <Route exact path='/search' component={Search} />
       <Route exact path='/info/:id' component={Info} />
-      <Route exact path='/formik' component={ValidationSchemaExample} />
+      <Route exact path='/tururu' component={ItemForm} />
     </Switch> }
     <Footer />
     </Container>

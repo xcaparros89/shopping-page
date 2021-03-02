@@ -20,7 +20,7 @@ export default function RegisterForm({}: any): ReactElement {
               address: "",
               city: "",
               state: "",
-              zip: "",
+              zip: 0,
               terms: false,
             };
             let handleRegisterSubmit = async (values: RegisterValues) => {

@@ -20,3 +20,10 @@ export const loginSchema = yup.object().shape({
   username: yup.string().required(),
   password: yup.string().required()
 });
+
+export const itemSchema = yup.object().shape({
+  title: yup.string().required(),
+  description: yup.string().required(),
+  price: yup.number().required(),
+  tags: yup.array().required(),
+});

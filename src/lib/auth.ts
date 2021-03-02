@@ -29,7 +29,7 @@ class Auth {
     surnames: string;
     city: string;
     state: string;
-    zip: string;
+    zip: number;
   }) {
     return this.auth
       .post("/auth/signup", { username, email, password, address, name, surnames, city, state, zip })

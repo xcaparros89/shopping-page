@@ -8,11 +8,17 @@ export interface RegisterValues {
     address: string;
     city: string;
     state: string;
-    zip: string;
+    zip: number;
     terms: boolean;
   };
 export interface LoginValues {
     username: string;
     password: string;
   }
-  
+
+export interface ItemValues {
+    title: string;
+    description: string;
+    price: number;
+    tags: [string];
+};
