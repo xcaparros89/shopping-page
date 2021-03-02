@@ -1,0 +1,16 @@
+.flowerListContainer{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flowerContainer{
+    background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+width: 200px;
+height: 200px;
+text-align: center;
+color: white;
+margin: 5px;
+}
