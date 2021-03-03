@@ -1,10 +1,10 @@
 import axios from "axios";
 
-class Item {
-  // TODO change item type
-  item: any;
+class Category {
+  // TODO change category type
+  category: any;
   constructor() {
-    this.item = axios.create({
+    this.category = axios.create({
       baseURL: process.env.REACT_APP_API_URL,
       withCredentials: true,
     });
@@ -13,16 +13,14 @@ class Item {
   create({
     title,
     description,
-    price,
-    tags
+    discount
   }: {
     title: string,
     description: string,
-    price: number,
-    tags: [string?],
+    discount: number,
   }) {
-    return this.item
-      .post("/item/create", {title, description, price, tags })
+    return this.category
+      .post("/category/create", {title, description, discount })
       .then(({ data }: any) => data);
   }
   findOne({
@@ -30,17 +28,13 @@ class Item {
   }: {
     title: string
   }) {
-    return this.item
-      .post("/item/findOne", { title})
+    return this.category
+      .post("/category/findOne", { title})
       .then(({ data }: any) => data);
   }
-  findByCategory({
-    category
-  }: {
-    category: string
-  }) {
-    return this.item
-      .post("/item/findByCategory", { category})
+  findAll() {
+    return this.category
+      .get("/category/findAll",)
       .then(({ data }: any) => data);
   }
   update({
@@ -54,8 +48,8 @@ class Item {
     price: number,
     tags: [string],
   }) {
-    return this.item
-      .post("/item/update", {title, description, price, tags })
+    return this.category
+      .post("/category/update", {title, description, price, tags })
       .then(({ data }: any) => data);
   }
   delete({
@@ -63,12 +57,12 @@ class Item {
   }: {
     title: string
   }) {
-    return this.item
-      .post("/item/delete", { title})
+    return this.category
+      .post("/category/delete", { title})
       .then(({ data }: any) => data);
   }
 }
 
-const axiosRequestFunctions = new Item();
+const axiosRequestFunctions = new Category();
 
 export default axiosRequestFunctions;

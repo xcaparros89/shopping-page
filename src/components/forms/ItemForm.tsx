@@ -1,20 +1,27 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import InputGroup from "react-bootstrap/InputGroup";
 import { Formik } from "formik";
 import item from "../../lib/item";
+import categoriesDB from "../../lib/categories";
 import {ItemValues} from '../../interfaces';
 import {itemSchema} from './validationForms';
-let tags = ['cat1', 'cat2', 'cat3']
 export default function ItemForm({}: any): ReactElement {
+    useEffect(()=>{
+      const fetchCategories = async () => {
+        const result = await categoriesDB.findAll();
+        setCategories(result);
+      }
+      fetchCategories();
+    },[])
     let [error, setError] = useState({success:true, body:''})
+    let [categories, setCategories] = useState([{title:''}])
             const initialValues: ItemValues = {
                 title: "",
                 description: '',
                 price: 0,
-                tags: ['initial'],
+                tags: [],
             };
             let handleItemSubmit = async (values: ItemValues) => {
               console.log(values);
@@ -103,30 +110,20 @@ export default function ItemForm({}: any): ReactElement {
                       <Form.Row>
                         <Form.Group as={Col} md="4" controlId="validationFormik01">
                           <Form.Label>Categories</Form.Label>
-                          <Form.Check
-                            type="checkbox"
-                            name="tags"
-                            value='hi'
-                            onChange={handleChange}
-                            isValid={touched.title && !errors.title}
-                            isInvalid={!!errors.title}
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            name="tags"
-                            value='hit'
-                            onChange={handleChange}
-                            isValid={touched.title && !errors.title}
-                            isInvalid={!!errors.title}
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            name="tags"
-                            value='hitt'
-                            onChange={handleChange}
-                            isValid={touched.title && !errors.title}
-                            isInvalid={!!errors.title}
-                          />
+                          {categories.map(category =>{
+                            if(category.title){
+                            return(
+                              <Form.Check
+                                type="checkbox"
+                                name="tags"
+                                value={category.title}
+                                label={category.title}
+                                onChange={handleChange}
+                              />
+                            )} else {
+                              return <p>There are no categories</p>
+                            }
+                          })}
                         </Form.Group>
                       </Form.Row>
                       <Button type="submit">Submit form</Button>

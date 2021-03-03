@@ -20,5 +20,5 @@ export interface ItemValues {
     title: string;
     description: string;
     price: number;
-    tags: [string];
+    tags: [string?];
 };

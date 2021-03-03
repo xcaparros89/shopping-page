@@ -2,7 +2,6 @@ import React, { ReactElement, useState } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import InputGroup from "react-bootstrap/InputGroup";
 import { Formik } from "formik";
 import auth from "../../lib/auth";
 import {RegisterValues} from '../../interfaces';
@@ -115,10 +114,6 @@ export default function RegisterForm({}: any): ReactElement {
                         </Form.Group>
                         <Form.Group as={Col} md="4" controlId="validationFormikUsername">
                           <Form.Label>Username</Form.Label>
-                          <InputGroup hasValidation>
-                            <InputGroup.Prepend>
-                              <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                            </InputGroup.Prepend>
                             <Form.Control
                               type="text"
                               placeholder="Username"
@@ -133,7 +128,6 @@ export default function RegisterForm({}: any): ReactElement {
                             <Form.Control.Feedback type="invalid">
                               {errors.username}
                             </Form.Control.Feedback>
-                          </InputGroup>
                         </Form.Group>
                       </Form.Row>
                       <Form.Row>
