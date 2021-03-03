@@ -22,3 +22,8 @@ export interface ItemValues {
     price: number;
     tags: [string?];
 };
+export interface CategoryValues {
+    title: string;
+    description: string;
+    discount: number;
+};

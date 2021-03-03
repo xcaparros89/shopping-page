@@ -1,16 +1,14 @@
 import React, { ReactElement } from 'react'
-import './CategoriesStyle.css'
+import './SearchStyle.css'
 import { Link } from 'react-router-dom';
 import data from '../../../plants.json'
-interface Props {
-    
-}
 
-export default function Categories({}: Props): ReactElement {
+
+export default function ItemsList(): any {
     return (
         <div className="flowerListContainer">
             {data.map(item=>(
-            <Link to={`/info/${item.id}`} key={item.id} className="flowerContainer" style={{backgroundImage: `url(${item.src})`}}>
+            <Link to={`/modify/${item.id}`} key={item.id} className="flowerContainer" style={{backgroundImage: `url(${item.src})`}}>
                 <div className="transparent-backgroupd">
                 <p>{item.title}</p>
                 <p>{item.info}</p>
@@ -18,6 +16,7 @@ export default function Categories({}: Props): ReactElement {
                 </div>
             </Link>
             ))}
+            <p>Add item</p>
         </div>
     )
 }

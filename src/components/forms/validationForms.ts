@@ -27,3 +27,9 @@ export const itemSchema = yup.object().shape({
   price: yup.number().required(),
   tags: yup.array(),
 });
+
+export const categorySchema = yup.object().shape({
+  title: yup.string().required(),
+  description: yup.string().required(),
+  discount: yup.number(),
+});

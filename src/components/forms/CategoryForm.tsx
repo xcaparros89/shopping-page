@@ -1,43 +1,34 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useState } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
+import InputGroup from "react-bootstrap/InputGroup";
 import { Formik } from "formik";
-import item from "../../lib/item";
-import categoriesDB from "../../lib/categories";
-import {ItemValues} from '../../interfaces';
-import {itemSchema} from './validationForms';
-export default function ItemForm({}: any): ReactElement {
-    useEffect(()=>{
-      const fetchCategories = async () => {
-        const result = await categoriesDB.findAll();
-        setCategories(result.body);
-      }
-      fetchCategories();
-    },[])
+import category from "../../lib/category";
+import {CategoryValues} from '../../interfaces';
+import {categorySchema} from './validationForms';
+
+export default function CategoryForm({}: any): ReactElement {
     let [error, setError] = useState({success:true, body:''})
-    let [categories, setCategories] = useState([{title:''}])
-            const initialValues: ItemValues = {
-                title: "",
-                description: '',
-                price: 0,
-                tags: [],
+            const initialValues: CategoryValues = {
+              title:'',
+              description:'',
+              discount:0
             };
-            let handleItemSubmit = async (values: ItemValues) => {
+            let handleCategorySubmit = async (values: CategoryValues) => {
               console.log(values);
-              const newItem = await item.create({
+              const Category = await category.create({
                 title: values.title,
                 description: values.description,
-                price: values.price,
-                tags: values.tags,
+                discount: values.discount,
               });
-              setError(newItem);
+              setError(Category);
             };
             return (
               <Formik
-                validationSchema={itemSchema}
-                onSubmit={(values: ItemValues) => {
-                    handleItemSubmit(values);
+                validationSchema={categorySchema}
+                onSubmit={(values: CategoryValues) => {
+                  handleCategorySubmit(values);
                 }}
                 initialValues={initialValues}
               >
@@ -51,7 +42,7 @@ export default function ItemForm({}: any): ReactElement {
                   errors,
                 }) => (
                   <>
-                    <h2>Item creator</h2>
+                    <h2>Category</h2>
                     {!error.success && 
                         <p>{error.body}</p>
                     }
@@ -92,38 +83,19 @@ export default function ItemForm({}: any): ReactElement {
                       </Form.Row>
                       <Form.Row>
                         <Form.Group as={Col} md="4" controlId="validationFormik01">
-                          <Form.Label>Price</Form.Label>
+                          <Form.Label>discount</Form.Label>
                           <Form.Control
                             type="number"
-                            name="price"
-                            value={values.price}
+                            name="discount"
+                            value={values.discount}
                             onChange={handleChange}
-                            isValid={touched.price && !errors.price}
-                            isInvalid={!!errors.price}
+                            isValid={touched.discount && !errors.discount}
+                            isInvalid={!!errors.discount}
                           />
                           <Form.Control.Feedback></Form.Control.Feedback>
                           <Form.Control.Feedback type="invalid">
-                            {errors.price}
+                            {errors.discount}
                           </Form.Control.Feedback>
-                        </Form.Group>
-                      </Form.Row>
-                      <Form.Row>
-                        <Form.Group as={Col} md="4" controlId="validationFormik01">
-                          <Form.Label>Categories</Form.Label>
-                          {categories.map(category =>{
-                            if(category.title){
-                            return(
-                              <Form.Check
-                                type="checkbox"
-                                name="tags"
-                                value={category.title}
-                                label={category.title}
-                                onChange={handleChange}
-                              />
-                            )} else {
-                              return <p>There are no categories</p>
-                            }
-                          })}
                         </Form.Group>
                       </Form.Row>
                       <Button type="submit">Submit form</Button>
