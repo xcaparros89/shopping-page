@@ -9,13 +9,10 @@ import { CategoryValues } from "../../interfaces";
 import { categorySchema } from "./validationForms";
 
 export default function CategoryForm(
-  initialValues: any = {
-    title: "iuy",
-    description: "",
-    discount: 0,
-  }
+  props: any
 ): ReactElement {
-  console.log('initialValues', initialValues)
+
+  console.log('initialValues', props.initialValues)
   let [error, setError] = useState({ success: true, body: "" });
   let handleCategorySubmit = async (values: CategoryValues) => {
     console.log(values);
@@ -26,6 +23,7 @@ export default function CategoryForm(
     });
     setError(Category);
   };
+  let initialValues = props.initialValues? props.initialValues : {title:'', description:'', discount:''};
   return (
     <Formik
       validationSchema={categorySchema}
@@ -33,6 +31,7 @@ export default function CategoryForm(
         handleCategorySubmit(values);
       }}
       initialValues={initialValues}
+      enableReinitialize={true}
     >
       {({
         handleSubmit,
@@ -44,7 +43,7 @@ export default function CategoryForm(
         errors,
       }) => (
         <>
-        {console.log('values', initialValues)}
+        {console.log('values', props.initialValues)}
           <h2>Category</h2>
           {!error.success && <p>{error.body}</p>}
           <Form noValidate onSubmit={handleSubmit}>
