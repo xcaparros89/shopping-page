@@ -23,13 +23,11 @@ class Category {
       .post("/category/create", {title, description, discount })
       .then(({ data }: any) => data);
   }
-  findOne({
-    title
-  }: {
-    title: string
-  }) {
+  findOne(
+    id: string
+  ) {
     return this.category
-      .post("/category/findOne", { title})
+      .get(`/category/findOne/_id/${id}`)
       .then(({ data }: any) => data);
   }
   findAll() {

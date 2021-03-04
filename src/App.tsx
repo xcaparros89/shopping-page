@@ -10,18 +10,23 @@ import Search from "./components/Search/Search";
 import Info from "./components/Info";
 import Container from 'react-bootstrap/Container';
 import ItemForm from './components/forms/ItemForm'
+import CategoryForm from './components/forms/CategoryForm'
+import CategoriesList from './components/admin/Categories/CategoriesList'
+import CategoryInfo from './components/admin/Categories/CategoryInfo'
 
 function App() {
-  let categories=['fruits'];
   return (
     <Container fluid="xl">
-    <Header categories={categories}/>
+    <Header/>
     { <Switch>
       <Route exact path='/' component={Home} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/search' component={Search} />
       <Route exact path='/info/:id' component={Info} />
-      <Route exact path='/tururu' component={ItemForm} />
+      <Route exact path='/createItem' component={ItemForm} />
+      <Route exact path='/createCategory' component={CategoryForm} />
+      <Route exact path='/categoriesList' component={CategoriesList} />
+      <Route exact path='/categoriesList/:id' component={CategoryInfo} />
     </Switch> }
     <Footer />
     </Container>

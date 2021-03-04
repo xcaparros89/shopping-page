@@ -27,3 +27,6 @@ export interface CategoryValues {
     description: string;
     discount: number;
 };
+export interface idType {
+    id: string;
+};

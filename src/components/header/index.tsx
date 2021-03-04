@@ -1,17 +1,22 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import "./navbarStyle.css";
-interface Props {
-  categories: string[];
-}
+import categoriesDB from "../../lib/categories";
 
-export default function Header({ categories }: Props): ReactElement {
+export default function Header(): ReactElement {
+  useEffect(()=>{
+    const fetchCategories = async () => {
+      const result = await categoriesDB.findAll();
+      setCategories(result.body);
+    }
+    fetchCategories();
+  },[])
+  let [categories, setCategories] = useState([{title:''}])
   return (
     <Navbar className="basicColors" expand="lg">
       <Navbar.Brand href="/">Xavi's garden</Navbar.Brand>
@@ -29,8 +34,8 @@ export default function Header({ categories }: Props): ReactElement {
               <Dropdown.Item style={{color: 'rgba(0,0,0,.5)'}} href="/search/new">New</Dropdown.Item>
               <Dropdown.Divider />
               {categories.map((category) => (
-                <Dropdown.Item style={{color: 'rgba(0,0,0,.5)'}} href={`/search/${category}`}>
-                  {category}
+                <Dropdown.Item style={{color: 'rgba(0,0,0,.5)'}} href={`/search/${category.title}`}>
+                  {category.title}
                 </Dropdown.Item>
               ))}
             </Dropdown.Menu>
