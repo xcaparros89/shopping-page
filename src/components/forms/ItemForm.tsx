@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { Formik } from "formik";
 import item from "../../lib/item";
-import categoriesDB from "../../lib/categories";
+import categoriesDB from "../../lib/category";
 import {ItemValues} from '../../interfaces';
 import {itemSchema} from './validationForms';
 export default function ItemForm({}: any): ReactElement {

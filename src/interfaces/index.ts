@@ -23,6 +23,7 @@ export interface ItemValues {
     tags: [string?];
 };
 export interface CategoryValues {
+    _id: string | null;
     title: string;
     description: string;
     discount: number;

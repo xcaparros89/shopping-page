@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom';
-import categoriesDB from "../../../lib/categories";
+import categoriesDB from "../../../lib/category";
 import CategoryForm from "../../forms/CategoryForm";
 import {idType} from '../../../interfaces'
 
@@ -9,7 +9,7 @@ export default function CategoryInfo(): ReactElement {
     useEffect(()=>{
         const fetchCategory = async () => {
             console.log(id);
-            const result = await categoriesDB.findOne(id);
+            const result = await categoriesDB.findOne('_id',id);
             console.log(result, 'result')
             setCategory(result.body);
           }

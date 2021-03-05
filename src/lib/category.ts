@@ -23,13 +23,12 @@ class Category {
       .post("/category/create", {title, description, discount })
       .then(({ data }: any) => data);
   }
-  findOne({
-    title
-  }: {
-    title: string
-  }) {
+  findOne(
+    key:string,
+    value:string
+    ) {
     return this.category
-      .post("/category/findOne", { title})
+      .post(`/category/findOne/${key}/${value}`)
       .then(({ data }: any) => data);
   }
   findByCategory({
@@ -41,17 +40,26 @@ class Category {
       .post("/category/findByCategory", { category})
       .then(({ data }: any) => data);
   }
+
+  findAll() {
+    return this.category
+      .get("/category/findAll",)
+      .then(({ data }: any) => data);
+  }
+
   update({
+    _id,
     title,
     description,
     discount
   }: {
+    _id:string,
     title: string,
     description: string,
     discount: number,
   }) {
     return this.category
-      .post("/category/update", {title, description, discount })
+      .post("/category/update", {_id, title, description, discount })
       .then(({ data }: any) => data);
   }
   delete({

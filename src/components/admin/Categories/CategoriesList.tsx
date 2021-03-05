@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect } from "react";
 import './CategoriesListStyle.css'
 import { Link } from 'react-router-dom';
-import categoriesDB from "../../../lib/categories";
+import categoriesDB from "../../../lib/category";
 
 export default function CategoriesList(): ReactElement {
     useEffect(()=>{

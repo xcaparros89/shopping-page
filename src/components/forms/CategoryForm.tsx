@@ -15,12 +15,21 @@ export default function CategoryForm(
   console.log('initialValues', props.initialValues)
   let [error, setError] = useState({ success: true, body: "" });
   let handleCategorySubmit = async (values: CategoryValues) => {
-    console.log(values);
-    const Category = await category.create({
-      title: values.title,
-      description: values.description,
-      discount: values.discount,
-    });
+      let Category;
+      if(values._id){
+        Category = await category.update({
+          _id: values._id,
+          title: values.title,
+          description: values.description,
+          discount: values.discount,
+        });
+      } else{
+      Category = await category.create({
+        title: values.title,
+        description: values.description,
+        discount: values.discount,
+      });
+    }
     setError(Category);
   };
   let initialValues = props.initialValues? props.initialValues : {title:'', description:'', discount:''};
