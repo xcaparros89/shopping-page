@@ -7,7 +7,7 @@ import item from "../../lib/item";
 import categoriesDB from "../../lib/category";
 import {ItemValues} from '../../interfaces';
 import {itemSchema} from './validationForms';
-export default function ItemForm({}: any): ReactElement {
+export default function ItemForm(props: any): ReactElement {
     useEffect(()=>{
       const fetchCategories = async () => {
         const result = await categoriesDB.findAll();
@@ -15,23 +15,34 @@ export default function ItemForm({}: any): ReactElement {
       }
       fetchCategories();
     },[])
-    let [error, setError] = useState({success:true, body:''})
     let [categories, setCategories] = useState([{title:''}])
-            const initialValues: ItemValues = {
+
+    let [error, setError] = useState({success:true, body:''})
+    let handleItemSubmit = async (values: ItemValues) => {
+      let Item;
+      if(values._id){
+        Item = await item.update({
+          _id: values._id,
+          title: values.title,
+          description: values.description,
+          price: values.price,
+          tags: values.tags,
+        })
+      } else {
+        Item = await item.create({
+          title: values.title,
+          description: values.description,
+          price: values.price,
+          tags: values.tags,
+        })
+      }
+      setError(Item);
+    }
+      let initialValues = props.initialValues? props.initialValues : {
                 title: "",
                 description: '',
                 price: 0,
                 tags: [],
-            };
-            let handleItemSubmit = async (values: ItemValues) => {
-              console.log(values);
-              const newItem = await item.create({
-                title: values.title,
-                description: values.description,
-                price: values.price,
-                tags: values.tags,
-              });
-              setError(newItem);
             };
             return (
               <Formik

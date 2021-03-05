@@ -14,57 +14,51 @@ class Item {
     title,
     description,
     price,
-    tags
+    tags,
   }: {
-    title: string,
-    description: string,
-    price: number,
-    tags: [string?],
+    title: string;
+    description: string;
+    price: number;
+    tags: [string?];
   }) {
     return this.item
-      .post("/item/create", {title, description, price, tags })
+      .post("/item/create", { title, description, price, tags })
       .then(({ data }: any) => data);
   }
-  findOne({
-    title
-  }: {
-    title: string
-  }) {
+
+  findOne(key: string, value: string) {
     return this.item
-      .post("/item/findOne", { title})
+      .post(`/item/findOne/${key}/${value}`)
       .then(({ data }: any) => data);
   }
-  findByCategory({
-    category
-  }: {
-    category: string
-  }) {
+  findByCategory({ category }: { category: string }) {
     return this.item
-      .post("/item/findByCategory", { category})
+      .post("/item/findByCategory", { category })
       .then(({ data }: any) => data);
   }
+
+  findAll() {
+    return this.item.get("/item/findAll").then(({ data }: any) => data);
+  }
+
   update({
     title,
     description,
     price,
-    tags
+    tags,
   }: {
-    title: string,
-    description: string,
-    price: number,
-    tags: [string],
+    title: string;
+    description: string;
+    price: number;
+    tags: [string];
   }) {
     return this.item
-      .post("/item/update", {title, description, price, tags })
+      .post("/item/update", { title, description, price, tags })
       .then(({ data }: any) => data);
   }
-  delete({
-    title
-  }: {
-    title: string
-  }) {
+  delete({ title }: { title: string }) {
     return this.item
-      .post("/item/delete", { title})
+      .post("/item/delete", { title })
       .then(({ data }: any) => data);
   }
 }

@@ -13,62 +13,44 @@ class Category {
   create({
     title,
     description,
-    discount
+    discount,
   }: {
-    title: string,
-    description: string,
-    discount: number,
+    title: string;
+    description: string;
+    discount: number;
   }) {
     return this.category
-      .post("/category/create", {title, description, discount })
+      .post("/category/create", { title, description, discount })
       .then(({ data }: any) => data);
   }
-  findOne(
-    key:string,
-    value:string
-    ) {
+  findOne(key: string, value: string) {
     return this.category
       .post(`/category/findOne/${key}/${value}`)
       .then(({ data }: any) => data);
   }
-  findByCategory({
-    category
-  }: {
-    category: string
-  }) {
-    return this.category
-      .post("/category/findByCategory", { category})
-      .then(({ data }: any) => data);
-  }
 
   findAll() {
-    return this.category
-      .get("/category/findAll",)
-      .then(({ data }: any) => data);
+    return this.category.get("/category/findAll").then(({ data }: any) => data);
   }
 
   update({
     _id,
     title,
     description,
-    discount
+    discount,
   }: {
-    _id:string,
-    title: string,
-    description: string,
-    discount: number,
+    _id: string;
+    title: string;
+    description: string;
+    discount: number;
   }) {
     return this.category
-      .post("/category/update", {_id, title, description, discount })
+      .post("/category/update", { _id, title, description, discount })
       .then(({ data }: any) => data);
   }
-  delete({
-    title
-  }: {
-    title: string
-  }) {
+  delete({ title }: { title: string }) {
     return this.category
-      .post("/category/delete", { title})
+      .post("/category/delete", { title })
       .then(({ data }: any) => data);
   }
 }

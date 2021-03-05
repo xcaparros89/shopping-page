@@ -13,6 +13,8 @@ import ItemForm from './components/forms/ItemForm'
 import CategoryForm from './components/forms/CategoryForm'
 import CategoriesList from './components/admin/Categories/CategoriesList'
 import CategoryInfo from './components/admin/Categories/CategoryInfo'
+import ItemsList from './components/admin/Items/ItemsList'
+import ItemInfo from './components/admin/Items/ItemInfo'
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
       <Route exact path='/createCategory' component={CategoryForm} />
       <Route exact path='/categoriesList' component={CategoriesList} />
       <Route exact path='/categoriesList/:id' component={CategoryInfo} />
+      <Route exact path='/createItem' component={ItemForm} />
+      <Route exact path='/itemsList' component={ItemsList} />
+      <Route exact path='/itemsList/:id' component={ItemInfo} />
     </Switch> }
     <Footer />
     </Container>

@@ -17,6 +17,7 @@ export interface LoginValues {
   }
 
 export interface ItemValues {
+    _id: string | null;
     title: string;
     description: string;
     price: number;
