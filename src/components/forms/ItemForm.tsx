@@ -8,6 +8,7 @@ import categoriesDB from "../../lib/category";
 import {ItemValues} from '../../interfaces';
 import {itemSchema} from './validationForms';
 export default function ItemForm(props: any): ReactElement {
+  //----------------------------
     useEffect(()=>{
       const fetchCategories = async () => {
         const result = await categoriesDB.findAll();
@@ -16,7 +17,7 @@ export default function ItemForm(props: any): ReactElement {
       fetchCategories();
     },[])
     let [categories, setCategories] = useState([{title:''}])
-
+//---------------------------------
     let [error, setError] = useState({success:true, body:''})
     let handleItemSubmit = async (values: ItemValues) => {
       let Item;
@@ -51,6 +52,7 @@ export default function ItemForm(props: any): ReactElement {
                     handleItemSubmit(values);
                 }}
                 initialValues={initialValues}
+                enableReinitialize={true}
               >
                 {({
                   handleSubmit,
@@ -66,6 +68,7 @@ export default function ItemForm(props: any): ReactElement {
                     {!error.success && 
                         <p>{error.body}</p>
                     }
+                    {console.log(values, 'values')}
                     <Form noValidate onSubmit={handleSubmit}>
                       <Form.Row>
                         <Form.Group as={Col} md="4" controlId="validationFormik01">
@@ -127,6 +130,7 @@ export default function ItemForm(props: any): ReactElement {
                               <Form.Check
                                 type="checkbox"
                                 name="tags"
+                                checked={values.tags && values.tags.includes(category.title)? true : false}
                                 value={category.title}
                                 label={category.title}
                                 onChange={handleChange}

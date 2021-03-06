@@ -8,14 +8,13 @@ export default function CategoryInfo(): ReactElement {
     let {id} = useParams<idType>();
     useEffect(()=>{
         const fetchCategory = async () => {
-            console.log(id);
             const result = await categoriesDB.findOne('_id',id);
-            console.log(result, 'result')
             setCategory(result.body);
           }
           fetchCategory();
         },[])
-        let [category, setCategory] = useState([{title:'', _id:'', description:'', discount:0}])
+        let [category, setCategory] = useState([
+            {title:'', _id:'', description:'', discount:0}])
         console.log(category)
     return (
         <div>

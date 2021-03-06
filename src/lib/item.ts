@@ -28,12 +28,12 @@ class Item {
 
   findOne(key: string, value: string) {
     return this.item
-      .post(`/item/findOne/${key}/${value}`)
+      .get(`/item/findOne/${key}/${value}`)
       .then(({ data }: any) => data);
   }
   findByCategory({ category }: { category: string }) {
     return this.item
-      .post("/item/findByCategory", { category })
+      .get("/item/findByCategory", { category })
       .then(({ data }: any) => data);
   }
 
@@ -42,18 +42,20 @@ class Item {
   }
 
   update({
+    _id,
     title,
     description,
     price,
     tags,
   }: {
+    _id: string;
     title: string;
     description: string;
     price: number;
-    tags: [string];
+    tags: [string?];
   }) {
     return this.item
-      .post("/item/update", { title, description, price, tags })
+      .post("/item/update", { _id, title, description, price, tags })
       .then(({ data }: any) => data);
   }
   delete({ title }: { title: string }) {
