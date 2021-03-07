@@ -3,6 +3,7 @@ import "./SearchStyle.css";
 import { Link } from "react-router-dom";
 import itemsDB from "../../../lib/item";
 import {UserContext} from '../../../lib/AuthProvider' 
+import { Redirect } from 'react-router-dom';
 
 export default function ItemsList(): ReactElement {
   useEffect(() => {
@@ -16,12 +17,10 @@ export default function ItemsList(): ReactElement {
     { title: "", _id: "", description: "", price: "", tags: [] },
   ]);
 let [user, setUser] = useContext(UserContext);
-console.log(user.isAdmin, 'user');
-setUser((oldUser:any)=>({...oldUser, isAdmin:true}));
-console.log(user.isAdmin, 'user');
 
   return (
     <>
+      {!user.isAdmin && <Redirect to='/admin/login'></Redirect>}
       <div className="flowerListContainer">
         {items.map((item) => (
           <Link

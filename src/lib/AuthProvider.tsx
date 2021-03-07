@@ -5,7 +5,7 @@ export const UserContext = React.createContext<any>(null);
 export function UserProvider(props: any): ReactElement {
   const [user, setUser] = useState({
     userInfo: null,
-    isLogged: false,
+    isCustomer: false,
     isAdmin: false,
   });
   return (

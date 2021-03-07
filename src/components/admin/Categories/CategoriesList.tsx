@@ -2,8 +2,8 @@ import React, { ReactElement, useState, useEffect, useContext } from "react";
 import './CategoriesListStyle.css'
 import { Link } from 'react-router-dom';
 import categoriesDB from "../../../lib/category";
-import { Redirect } from 'react-router-dom';
 import {UserContext} from '../../../lib/AuthProvider' 
+import { Redirect } from 'react-router-dom';
 
 
 export default function CategoriesList(): ReactElement {

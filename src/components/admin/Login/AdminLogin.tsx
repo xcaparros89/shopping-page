@@ -8,7 +8,7 @@ export default function Login(): ReactElement {
   let [user, setUser] = useContext(UserContext);
   return (
     <div>
-      {!user.isAdmin && <Redirect to='/admin/login'></Redirect>}      
+      {user.isAdmin && <Redirect to='/admin/itemList'></Redirect>}      
       <LoginForm />
     </div>
   );

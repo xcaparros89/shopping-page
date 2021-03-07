@@ -7,9 +7,8 @@ import { Formik } from "formik";
 import auth from "../../lib/auth";
 import { LoginValues } from "../../interfaces";
 import { loginSchema } from "./validationForms";
-import { Redirect } from 'react-router-dom';
-import {UserContext} from '../../lib/AuthProvider' 
-
+import { Redirect } from "react-router-dom";
+import { UserContext } from "../../lib/AuthProvider";
 
 export default function LoginForm({}: any): ReactElement {
   let [error, setError] = useState({ success: true, body: "" });
@@ -25,12 +24,16 @@ export default function LoginForm({}: any): ReactElement {
       username: values.username,
       password: values.password,
     });
-    if(login.success){
-      setUser({userInfo:login.body, isLogged:true, isAdmin:false})
-    } else{
+    if (login.success) {
+      console.log(login.body, "login.body");
+      if (login.body.isAdmin) {
+        setUser({ userInfo: login.body, isCustomer:false, isAdmin: true });
+      } else {
+        setUser({ userInfo: login.body, isCustomer: true, isAdmin: false });
+      }
+    } else {
       setError(login);
     }
-    
   };
   return (
     <Formik
@@ -51,7 +54,8 @@ export default function LoginForm({}: any): ReactElement {
       }) => (
         <>
           <h2>Login</h2>
-          {user.isLogged && <Redirect to='/'></Redirect>}
+          {user.isAdmin && <Redirect to="/admin/itemsList"></Redirect>}
+          {user.isCustomer && <Redirect to="/"></Redirect>}
           {!error.success && <p>{error.body}</p>}
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Row>
