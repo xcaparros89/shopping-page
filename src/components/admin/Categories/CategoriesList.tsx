@@ -1,7 +1,10 @@
-import React, { ReactElement, useState, useEffect } from "react";
+import React, { ReactElement, useState, useEffect, useContext } from "react";
 import './CategoriesListStyle.css'
 import { Link } from 'react-router-dom';
 import categoriesDB from "../../../lib/category";
+import { Redirect } from 'react-router-dom';
+import {UserContext} from '../../../lib/AuthProvider' 
+
 
 export default function CategoriesList(): ReactElement {
     useEffect(()=>{
@@ -12,8 +15,10 @@ export default function CategoriesList(): ReactElement {
       fetchCategories();
     },[])
     let [categories, setCategories] = useState([{title:'', _id:'', description:'', discount:''}])
+    let [user, setUser] = useContext(UserContext);
     return (
         <>
+        {!user.isAdmin && <Redirect to='/admin/login'></Redirect>}
         <h1>Categories</h1>
         <div className="flowerListContainer">
             {categories.map(category=>(

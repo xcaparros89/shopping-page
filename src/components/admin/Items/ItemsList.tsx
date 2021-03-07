@@ -1,7 +1,8 @@
-import React, { ReactElement, useState, useEffect } from "react";
+import React, { ReactElement, useState, useEffect, useContext } from "react";
 import "./SearchStyle.css";
 import { Link } from "react-router-dom";
 import itemsDB from "../../../lib/item";
+import {UserContext} from '../../../lib/AuthProvider' 
 
 export default function ItemsList(): ReactElement {
   useEffect(() => {
@@ -14,6 +15,10 @@ export default function ItemsList(): ReactElement {
   let [items, setItems] = useState([
     { title: "", _id: "", description: "", price: "", tags: [] },
   ]);
+let [user, setUser] = useContext(UserContext);
+console.log(user.isAdmin, 'user');
+setUser((oldUser:any)=>({...oldUser, isAdmin:true}));
+console.log(user.isAdmin, 'user');
 
   return (
     <>

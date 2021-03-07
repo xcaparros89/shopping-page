@@ -1,11 +1,9 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import Row from 'react-bootstrap/Row'
 import './HomeStyle.css';
 import Slideshow from '../utils/Slideshow';
-interface Props {
-}
 
-export default function Home({}: Props): ReactElement {
+export default function Home(): ReactElement {
     let slidesArr = [{title:'rose', src:'./imgs/rose.jpg', price:3},{title:'sunflower', src:'./imgs/sunflower.jpg', price:13},{title:'water lily', src:'./imgs/water-lily.jpg', price:10}]
     return (
         <>

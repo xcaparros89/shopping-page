@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -7,9 +7,14 @@ import { Formik } from "formik";
 import auth from "../../lib/auth";
 import { LoginValues } from "../../interfaces";
 import { loginSchema } from "./validationForms";
+import { Redirect } from 'react-router-dom';
+import {UserContext} from '../../lib/AuthProvider' 
+
 
 export default function LoginForm({}: any): ReactElement {
   let [error, setError] = useState({ success: true, body: "" });
+  let [user, setUser] = useContext(UserContext);
+
   const initialValues: LoginValues = {
     username: "",
     password: "",
@@ -20,7 +25,12 @@ export default function LoginForm({}: any): ReactElement {
       username: values.username,
       password: values.password,
     });
-    setError(login);
+    if(login.success){
+      setUser({userInfo:login.body, isLogged:true, isAdmin:false})
+    } else{
+      setError(login);
+    }
+    
   };
   return (
     <Formik
@@ -40,7 +50,8 @@ export default function LoginForm({}: any): ReactElement {
         errors,
       }) => (
         <>
-          <h2>Register</h2>
+          <h2>Login</h2>
+          {user.isLogged && <Redirect to='/'></Redirect>}
           {!error.success && <p>{error.body}</p>}
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Row>
