@@ -9,11 +9,11 @@ import { ItemValues } from "../../interfaces";
 import { itemSchema } from "./validationForms";
 export default function ItemForm(props: any): ReactElement {
   //----------------------------
+  const fetchCategories = async () => {
+    const result = await categoriesDB.findAll();
+    setCategories(result.body);
+  };
   useEffect(() => {
-    const fetchCategories = async () => {
-      const result = await categoriesDB.findAll();
-      setCategories(result.body);
-    };
     fetchCategories();
   }, []);
   let [categories, setCategories] = useState([{ title: "" }]);
@@ -27,6 +27,7 @@ export default function ItemForm(props: any): ReactElement {
         title: values.title,
         description: values.description,
         price: values.price,
+        img: values.img,
         tags: values.tags,
       });
     } else {
@@ -34,6 +35,7 @@ export default function ItemForm(props: any): ReactElement {
         title: values.title,
         description: values.description,
         price: values.price,
+        img: values.img,
         tags: values.tags,
       });
     }
@@ -44,6 +46,7 @@ export default function ItemForm(props: any): ReactElement {
     : {
         title: "",
         description: "",
+        img: "",
         price: 0,
         tags: [],
       };
@@ -101,6 +104,23 @@ export default function ItemForm(props: any): ReactElement {
                 <Form.Control.Feedback></Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
                   {errors.description}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} md="4" controlId="validationFormik01">
+                <Form.Label>Image Path</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="img"
+                  value={values.img}
+                  onChange={handleChange}
+                  isValid={touched.img && !errors.img}
+                  isInvalid={!!errors.img}
+                />
+                <Form.Control.Feedback></Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  {errors.img}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>

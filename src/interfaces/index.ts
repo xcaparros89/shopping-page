@@ -20,6 +20,7 @@ export interface ItemValues {
     _id: string | null;
     title: string;
     description: string;
+    img: string;
     price: number;
     tags: [string?];
 };

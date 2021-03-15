@@ -13,16 +13,18 @@ class Item {
   create({
     title,
     description,
+    img,
     price,
     tags,
   }: {
     title: string;
     description: string;
+    img: string;
     price: number;
     tags: [string?];
   }) {
     return this.item
-      .post("/item/create", { title, description, price, tags })
+      .post("/item/create", { title, description, img, price, tags })
       .then(({ data }: any) => data);
   }
 
@@ -45,17 +47,19 @@ class Item {
     _id,
     title,
     description,
+    img,
     price,
     tags,
   }: {
     _id: string;
     title: string;
     description: string;
+    img: string;
     price: number;
     tags: [string?];
   }) {
     return this.item
-      .post("/item/update", { _id, title, description, price, tags })
+      .post("/item/update", { _id, title, description, img, price, tags })
       .then(({ data }: any) => data);
   }
   delete(id:string) {
