@@ -8,15 +8,15 @@ export default function ItemInfo(): ReactElement {
   let { id } = useParams<idType>();
   useEffect(() => {
     const fetchItem = async () => {
-      console.log(id);
       const result = await itemsDB.findOne("_id", id);
-      console.log(result, "result");
-      setItem(result.body);
+      if(result.success){
+        setItem(result.body);
+      }
     };
     fetchItem();
   }, [id]);
   let [item, setItem] = useState([
-    { title: "", description: "", price: 0, tags: [] },
+    { title: "", description: "", img:"", price: 0, tags: [] },
   ]);
   console.log(item);
   return (

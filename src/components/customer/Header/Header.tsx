@@ -14,8 +14,8 @@ export default function Header(): ReactElement {
   useEffect(() => {
     const fetchCategories = async () => {
       const result = await categoriesDB.findAll();
-      if(result.success){
-        console.log(result, 'result');
+      if (result.success) {
+        console.log(result, "result");
         setCategories(result.body);
       }
     };
@@ -23,7 +23,7 @@ export default function Header(): ReactElement {
   }, []);
   let [categories, setCategories] = useState([{ title: "" }]);
   let [user, setUser] = useContext(UserContext);
-  let logout = ():void => {
+  let logout = (): void => {
     setUser({ userInfo: null, isLogged: false, isAdmin: false });
   };
   return (

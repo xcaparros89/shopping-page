@@ -1,9 +1,10 @@
 import { ReactElement, useState, useEffect, useContext } from "react";
-import "./SearchStyle.css";
+import styles from "./ItemList.module.css";
 import { Link } from "react-router-dom";
 import itemsDB from "../../../lib/item";
 import {UserContext} from '../../../lib/AuthProvider' 
 import { Redirect } from 'react-router-dom';
+import Button from "react-bootstrap/Button";
 
 export default function ItemsList(): ReactElement {
   useEffect(() => {
@@ -33,40 +34,32 @@ export default function ItemsList(): ReactElement {
     }
   };
   return (
-    <>
-    <h1>Item List</h1>
+    <div className={styles.componentContainer}>
+    <h1 id={styles.title}>Item List</h1>
     {responseDB && <p>{responseDB}</p>}
       {!user.isAdmin && <Redirect to='/admin/login'></Redirect>}
-      <div className="flowerListContainer">
+      <Button variant='success' as={Link} to="/admin/createItem" >Create new Item</Button>
+      <div className={styles.listContainer}>
         {
          items.length && items[0].title ? (
               items.map((item:any) => {
                 return (
-                <div>
+                <div key={item._id} className={styles.itemContainer}>
                   <Link
                     to={`itemsList/${item._id}`}
-                    key={item._id}
-                    className="flowerContainer"
-                    style={{ background: "black" }}
                   >
-                    <div className="transparent-background">
-                      <p>{item.title}</p>
-                      <p>{item.description}</p>
+                      <h2>{item.title}</h2>
                       <p>Price: {item.price}€</p>
-                      <div>
-                          {item.tags && item.tags.map((tag:any)=>(
-                              <ul>{tag}</ul>
-                          ))}
-                      </div>
-                    </div>
                   </Link>
-                      <button onClick={()=>deleteItem(item._id)}>Delete</button>
+                  <div className={styles.imgContainer}>
+                      <img src={item.img} alt={item.title} />
+                      <Button variant='outline-warning' onClick={()=>deleteItem(item._id)} >Delete</Button>
+                  </div>
                       </div>
           )})):
           <p>No items found</p>
         }
       </div>
-      <Link to={"createItem"}>Create Item</Link>
-    </>
+    </div>
   );
 }
