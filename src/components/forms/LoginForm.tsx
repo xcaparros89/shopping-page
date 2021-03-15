@@ -10,7 +10,7 @@ import { loginSchema } from "./validationForms";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../lib/AuthProvider";
 
-export default function LoginForm({}: any): ReactElement {
+export default function LoginForm(): ReactElement {
   let [error, setError] = useState({ success: true, body: "" });
   let [user, setUser] = useContext(UserContext);
 

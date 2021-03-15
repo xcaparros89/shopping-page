@@ -1,8 +1,7 @@
-import React, { ReactElement, useState, useEffect, useContext } from "react";
+import { ReactElement, useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Button from "react-bootstrap/Button";
 import "./navbarStyle.css";
 import { UserContext } from "../../../lib/AuthProvider";
 

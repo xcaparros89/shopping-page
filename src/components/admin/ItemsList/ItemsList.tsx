@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect, useContext } from "react";
+import { ReactElement, useState, useEffect, useContext } from "react";
 import "./SearchStyle.css";
 import { Link } from "react-router-dom";
 import itemsDB from "../../../lib/item";
@@ -19,7 +19,7 @@ export default function ItemsList(): ReactElement {
     { title: "", _id: "", description: "", price: "", tags: [] },
   ]);
   let [responseDB, setResponseDB] = useState('');
-  let [user, setUser] = useContext(UserContext);
+  let [user] = useContext(UserContext);
   
   let deleteItem = async (id:string): Promise<any> => {
     const response = await itemsDB.delete(id)

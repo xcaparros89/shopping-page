@@ -14,7 +14,7 @@ export default function ItemInfo(): ReactElement {
       setItem(result.body);
     };
     fetchItem();
-  }, []);
+  }, [id]);
   let [item, setItem] = useState([
     { title: "", description: "", price: 0, tags: [] },
   ]);

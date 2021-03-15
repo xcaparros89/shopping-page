@@ -1,12 +1,10 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import './SearchStyle.css'
 import { Link } from 'react-router-dom';
 import data from '../../../plants.json'
-interface Props {
-    
-}
 
-export default function Search({}: Props): ReactElement {
+
+export default function Search(): ReactElement {
     return (
         <div className="flowerListContainer">
             {data.map(item=>(

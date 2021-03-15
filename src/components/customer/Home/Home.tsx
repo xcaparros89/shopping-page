@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from 'react'
+import React, { ReactElement} from 'react'
 import Row from 'react-bootstrap/Row'
 import './HomeStyle.css';
 import Slideshow from '../../utils/Slideshow';

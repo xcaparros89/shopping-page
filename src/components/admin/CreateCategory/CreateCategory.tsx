@@ -1,11 +1,8 @@
 import React, { ReactElement } from 'react'
 import { Link } from "react-router-dom";
 import CategoryForm from '../../forms/CategoryForm'
-interface Props {
-    
-}
 
-function CreateCategory({}: Props): ReactElement {
+function CreateCategory(): ReactElement {
     return (
         <div>
             <CategoryForm />

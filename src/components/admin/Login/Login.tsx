@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import {UserContext} from '../../../lib/AuthProvider' 
 
 export default function Login(): ReactElement {
-  let [user, setUser] = useContext(UserContext);
+  let [user] = useContext(UserContext);
   return (
     <div>
       {user.isAdmin && <Redirect to='/admin/itemList'></Redirect>}      

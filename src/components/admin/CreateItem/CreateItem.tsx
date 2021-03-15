@@ -1,11 +1,8 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { Link } from "react-router-dom";
 import ItemForm from '../../forms/ItemForm'
-interface Props {
-    
-}
 
-function CreateItem({}: Props): ReactElement {
+function CreateItem(): ReactElement {
     return (
         <div>
             <ItemForm />

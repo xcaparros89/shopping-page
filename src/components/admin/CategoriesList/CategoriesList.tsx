@@ -19,7 +19,7 @@ export default function CategoriesList(): ReactElement {
 
     let [categories, setCategories] = useState<any>([{title:'', _id:'', description:'', discount:''}])
     let [responseDB, setResponseDB] = useState('');
-    let [user, setUser] = useContext(UserContext);
+    let [user] = useContext(UserContext);
 
     let deleteCategory = async (id:string): Promise<any> => {
         const response = await categoriesDB.delete(id)

@@ -5,7 +5,7 @@ import CategoriesList from "./CategoriesList";
 import CategoryInfo from "./CategoryInfo";
 import ItemsList from "./ItemsList";
 import ItemInfo from "./ItemInfo";
-import AdminLogin from "./Login/AdminLogin";
+import AdminLogin from "./Login";
 import CreateCategory from "./CreateCategory";
 import createItem from "./CreateItem";
 import AdminHeader from "./Header/AdminHeader";

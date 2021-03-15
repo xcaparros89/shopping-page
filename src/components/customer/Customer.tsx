@@ -7,7 +7,6 @@ import Search from "./Search";
 import Info from "./Info";
 
 function App() {
-  let x = true;
   return (
     <>
       <Header />

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState, useContext} from 'react'
+import { ReactElement, useEffect, useState, useContext} from 'react'
 import {useParams} from 'react-router-dom';
 import categoriesDB from "../../../lib/category";
 import CategoryForm from "../../forms/CategoryForm";
@@ -14,10 +14,10 @@ export default function CategoryInfo(): ReactElement {
             setCategory(result.body);
           }
           fetchCategory();
-        },[])
+        },[id])
         let [category, setCategory] = useState([
             {title:'', _id:'', description:'', discount:0}])
-        let [user, setUser] = useContext(UserContext);
+        let [user] = useContext(UserContext);
     return (
         <div>
             {!user.isAdmin && <Redirect to='/admin/login'></Redirect>}

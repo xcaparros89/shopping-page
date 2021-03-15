@@ -7,7 +7,7 @@ import auth from "../../lib/auth";
 import {RegisterValues} from '../../interfaces';
 import {registerSchema} from './validationForms';
 
-export default function RegisterForm({}: any): ReactElement {
+export default function RegisterForm(): ReactElement {
     let [error, setError] = useState({success:true, body:''})
             const initialValues: RegisterValues = {
               name: "",
