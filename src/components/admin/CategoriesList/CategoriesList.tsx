@@ -10,24 +10,38 @@ export default function CategoriesList(): ReactElement {
     useEffect(()=>{
     const fetchCategories = async () => {
         const result = await categoriesDB.findAll();
-        setCategories(result.body);
+        if(result.success){
+            setCategories(result.body);
+        }
       }
       fetchCategories();
     },[])
-    let [categories, setCategories] = useState([{title:'', _id:'', description:'', discount:''}])
+
+    let [categories, setCategories] = useState<any>([{title:'', _id:'', description:'', discount:''}])
+    let [responseDB, setResponseDB] = useState('');
     let [user, setUser] = useContext(UserContext);
+
     let deleteCategory = async (id:string): Promise<any> => {
-        await categoriesDB.delete(id)
+        const response = await categoriesDB.delete(id)
+        if (response.success){
+            setResponseDB('Category deleted')
+            let newCategories = categories.filter((category:any)=>category._id !== response.body._id)
+            setCategories(newCategories);
+            console.log(response, 'response')
+          } else {
+            setResponseDB(response.body)
+          }
       };
 
     return (
         <>
-        {!user.isAdmin && <Redirect to='/admin/login'></Redirect>}
         <h1>Categories</h1>
+        {responseDB && <p>{responseDB}</p>}
+        {!user.isAdmin && <Redirect to='/admin/login'></Redirect>}
         <div className="flowerListContainer">
             {
-                categories[0].title ? (
-            categories.map(category=>(
+            categories.length && categories[0].title ? (
+            categories.map((category:any)=>(
                 <>
             <Link to={`categoriesList/${category._id}`} key={category._id} className="flowerContainer">
                 <div className="transparent-background">

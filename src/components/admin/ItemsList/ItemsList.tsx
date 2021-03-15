@@ -5,11 +5,6 @@ import itemsDB from "../../../lib/item";
 import {UserContext} from '../../../lib/AuthProvider' 
 import { Redirect } from 'react-router-dom';
 
-const fetchItems = async () => {
-  const result = await itemsDB.findAll();
-  return(result);
-};
-
 export default function ItemsList(): ReactElement {
   useEffect(() => {
     const fetchItems = async () => {
@@ -24,6 +19,8 @@ export default function ItemsList(): ReactElement {
     { title: "", _id: "", description: "", price: "", tags: [] },
   ]);
   let [responseDB, setResponseDB] = useState('');
+  let [user, setUser] = useContext(UserContext);
+  
   let deleteItem = async (id:string): Promise<any> => {
     const response = await itemsDB.delete(id)
     if (response.success){
@@ -35,7 +32,6 @@ export default function ItemsList(): ReactElement {
       setResponseDB(response.body)
     }
   };
-let [user, setUser] = useContext(UserContext);
   return (
     <>
     <h1>Item List</h1>
