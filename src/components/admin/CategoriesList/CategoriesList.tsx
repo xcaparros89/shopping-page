@@ -16,12 +16,19 @@ export default function CategoriesList(): ReactElement {
     },[])
     let [categories, setCategories] = useState([{title:'', _id:'', description:'', discount:''}])
     let [user, setUser] = useContext(UserContext);
+    let deleteCategory = async (id:string): Promise<any> => {
+        await categoriesDB.delete(id)
+      };
+
     return (
         <>
         {!user.isAdmin && <Redirect to='/admin/login'></Redirect>}
         <h1>Categories</h1>
         <div className="flowerListContainer">
-            {categories.map(category=>(
+            {
+                categories[0].title ? (
+            categories.map(category=>(
+                <>
             <Link to={`categoriesList/${category._id}`} key={category._id} className="flowerContainer">
                 <div className="transparent-background">
                 <p>{category.title}</p>
@@ -29,7 +36,10 @@ export default function CategoriesList(): ReactElement {
                 <p>Discount: {category.discount? category.discount+'%' : 'no'}</p>
                 </div>
             </Link>
-            ))}
+                <button onClick={()=>deleteCategory(category._id)}>Delete</button>
+                </>
+            ))): <p>No categories found</p>
+        }
         </div>
         <Link to={'createCategory'}>Create Category</Link>
         </>

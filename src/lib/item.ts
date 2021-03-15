@@ -58,9 +58,9 @@ class Item {
       .post("/item/update", { _id, title, description, price, tags })
       .then(({ data }: any) => data);
   }
-  delete({ title }: { title: string }) {
+  delete(id:string) {
     return this.item
-      .post("/item/delete", { title })
+      .get(`/item/delete/${id}`)
       .then(({ data }: any) => data);
   }
 }

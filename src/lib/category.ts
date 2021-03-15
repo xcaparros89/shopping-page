@@ -48,9 +48,9 @@ class Category {
       .post("/category/update", { _id, title, description, discount })
       .then(({ data }: any) => data);
   }
-  delete({ title }: { title: string }) {
+  delete(id: string) {
     return this.category
-      .post("/category/delete", { title })
+      .get(`/category/delete/${id}`)
       .then(({ data }: any) => data);
   }
 }
