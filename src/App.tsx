@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import {UserProvider} from './lib/AuthProvider'
 import Admin from './components/admin/Admin'
-import Customer from './components/Customer'
+import Customer from './components/customer/Customer'
 
 function App() {
   let x = true;

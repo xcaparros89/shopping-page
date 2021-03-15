@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect, useContext } from "react";
+import { ReactElement, useState, useEffect, useContext } from "react";
 import './CategoriesListStyle.css'
 import { Link } from 'react-router-dom';
 import categoriesDB from "../../../lib/category";
@@ -22,8 +22,8 @@ export default function CategoriesList(): ReactElement {
         <h1>Categories</h1>
         <div className="flowerListContainer">
             {categories.map(category=>(
-            <Link to={`/categoriesList/${category._id}`} key={category._id} className="flowerContainer">
-                <div className="transparent-backgroupd">
+            <Link to={`categoriesList/${category._id}`} key={category._id} className="flowerContainer">
+                <div className="transparent-background">
                 <p>{category.title}</p>
                 <p>{category.description}</p>
                 <p>Discount: {category.discount? category.discount+'%' : 'no'}</p>
@@ -31,7 +31,7 @@ export default function CategoriesList(): ReactElement {
             </Link>
             ))}
         </div>
-        <Link to={'/createCategory'}>Create Category</Link>
+        <Link to={'createCategory'}>Create Category</Link>
         </>
     )
 }

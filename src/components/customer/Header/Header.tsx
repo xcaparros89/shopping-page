@@ -7,14 +7,17 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import "./navbarStyle.css";
-import categoriesDB from "../../lib/category";
-import { UserContext } from "../../lib/AuthProvider";
+import categoriesDB from "../../../lib/category";
+import { UserContext } from "../../../lib/AuthProvider";
 
 export default function Header(): ReactElement {
   useEffect(() => {
     const fetchCategories = async () => {
       const result = await categoriesDB.findAll();
-      setCategories(result.body);
+      if(result.success){
+        console.log(result, 'result');
+        setCategories(result.body);
+      }
     };
     fetchCategories();
   }, []);

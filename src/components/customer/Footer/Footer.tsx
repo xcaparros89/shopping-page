@@ -1,11 +1,8 @@
 import React, { ReactElement } from 'react'
 import {Link} from 'react-router-dom';
 import './footerStyle.css';
-interface Props {
-    
-}
 
-export default function Footer({}: Props): ReactElement {
+export default function Footer(): ReactElement {
     return (
         <div id="footer">
             <h3>Follow us</h3>

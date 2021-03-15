@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import './SearchStyle.css'
 import { Link } from 'react-router-dom';
-import data from '../../plants.json'
+import data from '../../../plants.json'
 interface Props {
     
 }

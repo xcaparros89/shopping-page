@@ -11,8 +11,6 @@ import { categorySchema } from "./validationForms";
 export default function CategoryForm(
   props: any
 ): ReactElement {
-
-  console.log('initialValues', props.initialValues)
   let [error, setError] = useState({ success: true, body: "" });
   let handleCategorySubmit = async (values: CategoryValues) => {
       let Category;
@@ -52,7 +50,6 @@ export default function CategoryForm(
         errors,
       }) => (
         <>
-        {console.log('values', props.initialValues)}
           <h2>Category</h2>
           {!error.success && <p>{error.body}</p>}
           <Form noValidate onSubmit={handleSubmit}>

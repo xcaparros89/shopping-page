@@ -1,15 +1,15 @@
 import React, { ReactElement } from "react";
 import { Switch, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import CategoriesList from "./Categories/CategoriesList";
-import CategoryInfo from "./Categories/CategoryInfo";
-import ItemsList from "./Items/ItemsList";
-import ItemInfo from "./Items/ItemInfo";
+import CategoriesList from "./CategoriesList";
+import CategoryInfo from "./CategoryInfo";
+import ItemsList from "./ItemsList";
+import ItemInfo from "./ItemInfo";
 import AdminLogin from "./Login/AdminLogin";
-import ItemForm from "../forms/ItemForm";
-import CategoryForm from "../forms/CategoryForm";
+import CreateCategory from "./CreateCategory";
+import createItem from "./CreateItem";
 import AdminHeader from "./Header/AdminHeader";
-import Footer from "../Footer";
+import Footer from "../customer/Footer";
 
 export default function Admin(): ReactElement {
   return (
@@ -17,14 +17,14 @@ export default function Admin(): ReactElement {
       <AdminHeader />
       {
         <Switch>
+          <Route exact path="/admin/" component={AdminLogin} />
+          <Route exact path="/admin/login" component={AdminLogin} />
           <Route exact path="/admin/itemsList" component={ItemsList} />
           <Route exact path="/admin/itemsList/:id" component={ItemInfo} />
-          <Route exact path="/admin/login" component={AdminLogin} />
-          <Route exact path="/admin/createItem" component={ItemForm} />
-          <Route exact path="/admin/createCategory" component={CategoryForm} />
+          <Route exact path="/admin/createItem" component={createItem} />
           <Route exact path="/admin/categoriesList" component={CategoriesList} />
           <Route exact path="/admin/categoriesList/:id" component={CategoryInfo} />
-          <Route exact path="/admin/createItem" component={ItemForm} />
+          <Route exact path="/admin/createCategory" component={CreateCategory} />
         </Switch>
       }
       <Footer />

@@ -1,5 +1,4 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -149,7 +148,6 @@ export default function ItemForm(props: any): ReactElement {
             </Form.Row>
             <Button type="submit">Submit form</Button>
           </Form>
-          <Link to={"/itemsList"}>Return</Link>
         </>
       )}
     </Formik>

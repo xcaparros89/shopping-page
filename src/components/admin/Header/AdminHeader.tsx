@@ -29,7 +29,9 @@ export default function AdminHeader(): ReactElement {
             User List
           </Nav.Link>
           {user.isAdmin && 
-            <Button onClick={logout}>Logout</Button>
+            <Nav.Link as={Link} onClick={logout} to="/admin/login">
+            Logout
+          </Nav.Link>
           }
           </Nav>
       </Navbar.Collapse>

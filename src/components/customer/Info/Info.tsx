@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect,useState } from 'react'
-import data from '../plants.json';
+import data from '../../../plants.json';
 interface Props {
     
 }

@@ -24,7 +24,7 @@ let [user, setUser] = useContext(UserContext);
       <div className="flowerListContainer">
         {items.map((item) => (
           <Link
-            to={`/itemsList/${item._id}`}
+            to={`itemsList/${item._id}`}
             key={item._id}
             className="flowerContainer"
             style={{ background: "black" }}
@@ -42,7 +42,7 @@ let [user, setUser] = useContext(UserContext);
           </Link>
         ))}
       </div>
-      <Link to={"/createItem"}>Create Item</Link>
+      <Link to={"createItem"}>Create Item</Link>
     </>
   );
 }
