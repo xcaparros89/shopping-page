@@ -10,24 +10,29 @@ import { categorySchema } from "./validationForms";
 export default function CategoryForm(
   props: any
 ): ReactElement {
-  let [error, setError] = useState({ success: true, body: "" });
+  let [responseDB, setResponseDB] = useState<any>();
   let handleCategorySubmit = async (values: CategoryValues) => {
-      let Category;
+      let response;
       if(values._id){
-        Category = await category.update({
+        console.log('valuesId', values)
+        response = await category.update({
           _id: values._id,
           title: values.title,
           description: values.description,
           discount: values.discount,
         });
       } else{
-      Category = await category.create({
+        response = await category.create({
         title: values.title,
         description: values.description,
         discount: values.discount,
       });
     }
-    setError(Category);
+    if(response.success){
+      setResponseDB({success:true, body:'Category added correctly'})
+    }else{
+      setResponseDB(response);
+    }
   };
   let initialValues = props.initialValues? props.initialValues : {title:'', description:'', discount:''};
   return (
@@ -50,7 +55,7 @@ export default function CategoryForm(
       }) => (
         <>
           <h2>Category</h2>
-          {!error.success && <p>{error.body}</p>}
+          {responseDB && <p>{responseDB.body}</p>}
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Row>
               <Form.Group as={Col} md="4" controlId="validationFormik01">

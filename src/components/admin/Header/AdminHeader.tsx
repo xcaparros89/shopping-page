@@ -24,9 +24,9 @@ export default function AdminHeader(): ReactElement {
           <Nav.Link as={Link} to="/admin/categoriesList">
             Category List
           </Nav.Link>
-          <Nav.Link as={Link} to="#">
+          {/* <Nav.Link as={Link} to="#">
             User List
-          </Nav.Link>
+          </Nav.Link> */}
           {user.isAdmin && 
             <Nav.Link as={Link} onClick={logout} to="/admin/login">
             Logout

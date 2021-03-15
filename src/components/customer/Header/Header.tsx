@@ -69,10 +69,11 @@ export default function Header(): ReactElement {
                 New
               </Dropdown.Item>
               <Dropdown.Divider />
-              {categories.map((category) => (
+              {categories.map((category, index) => (
                 <Dropdown.Item
                   style={{ color: "rgba(0,0,0,.5)" }}
                   href={`/search/${category.title}`}
+                  key={index}
                 >
                   {category.title}
                 </Dropdown.Item>

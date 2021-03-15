@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'react-bootstrap/Image'
 interface Props {
@@ -14,8 +14,8 @@ interface ISlide {
 export default function Slideshow ({slidesArr}: Props): ReactElement {
     return (
 <Carousel>
-  {slidesArr.map(slide =>
-  <Carousel.Item>
+  {slidesArr.map((slide, index) =>
+  <Carousel.Item key={index}>
     <Image
     className="d-block w-100 "
       src={slide.src}

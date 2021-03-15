@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import Search from "./Search";
 import Info from "./Info";
 
-function App() {
+function Customer() {
   return (
     <>
       <Header />
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default Customer;

@@ -25,7 +25,7 @@ class Category {
   }
   findOne(key: string, value: string) {
     return this.category
-      .post(`/category/findOne/${key}/${value}`)
+      .get(`/category/findOne/${key}/${value}`)
       .then(({ data }: any) => data);
   }
 

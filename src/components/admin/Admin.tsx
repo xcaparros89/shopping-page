@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import { Switch, Route } from "react-router-dom";
-import Container from "react-bootstrap/Container";
 import CategoriesList from "./CategoriesList";
 import CategoryInfo from "./CategoryInfo";
 import ItemsList from "./ItemsList";
@@ -13,7 +12,7 @@ import Footer from "../customer/Footer";
 
 export default function Admin(): ReactElement {
   return (
-    <Container fluid="xl">
+    <>
       <AdminHeader />
       {
         <Switch>
@@ -28,6 +27,6 @@ export default function Admin(): ReactElement {
         </Switch>
       }
       <Footer />
-    </Container>
+      </>
   );
 }
