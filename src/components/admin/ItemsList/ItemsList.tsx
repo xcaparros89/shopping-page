@@ -50,6 +50,7 @@ export default function ItemsList(): ReactElement {
                   >
                       <h2>{item.title}</h2>
                       <p>Price: {item.price}€</p>
+                      <p>Discount: {item.discount ? item.discount + "%" : "no"}</p>
                   </Link>
                   <div className={styles.imgContainer}>
                       <img src={item.img} alt={item.title} />
