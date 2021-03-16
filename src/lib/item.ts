@@ -13,18 +13,20 @@ class Item {
   create({
     title,
     description,
-    img,
     price,
+    discount,
+    img,
     tags,
   }: {
     title: string;
     description: string;
-    img: string;
     price: number;
+    discount: number;
+    img: string;
     tags: [string?];
   }) {
     return this.item
-      .post("/item/create", { title, description, img, price, tags })
+      .post("/item/create", { title, description, img, price, discount, tags })
       .then(({ data }: any) => data);
   }
 
@@ -49,6 +51,7 @@ class Item {
     description,
     img,
     price,
+    discount,
     tags,
   }: {
     _id: string;
@@ -56,10 +59,11 @@ class Item {
     description: string;
     img: string;
     price: number;
+    discount: number;
     tags: [string?];
   }) {
     return this.item
-      .post("/item/update", { _id, title, description, img, price, tags })
+      .post("/item/update", { _id, title, description, img, price, discount, tags })
       .then(({ data }: any) => data);
   }
   delete(id:string) {

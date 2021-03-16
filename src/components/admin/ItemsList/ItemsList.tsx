@@ -49,12 +49,16 @@ export default function ItemsList(): ReactElement {
                     to={`itemsList/${item._id}`}
                   >
                       <h2>{item.title}</h2>
+                  </Link>
+                  <div className={styles.textImgContainer}>
+                  <div>
                       <p>Price: {item.price}€</p>
                       <p>Discount: {item.discount ? item.discount + "%" : "no"}</p>
-                  </Link>
+                    </div>
                   <div className={styles.imgContainer}>
                       <img src={item.img} alt={item.title} />
                       <Button variant='outline-warning' onClick={()=>deleteItem(item._id)} >Delete</Button>
+                  </div>
                   </div>
                       </div>
           )})):

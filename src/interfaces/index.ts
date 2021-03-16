@@ -22,6 +22,7 @@ export interface ItemValues {
     description: string;
     img: string;
     price: number;
+    discount: number;
     tags: [string?];
 };
 export interface CategoryValues {

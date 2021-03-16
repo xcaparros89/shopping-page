@@ -27,6 +27,7 @@ export default function ItemForm(props: any): ReactElement {
         title: values.title,
         description: values.description,
         price: values.price,
+        discount: values.discount,
         img: values.img,
         tags: values.tags,
       });
@@ -35,6 +36,7 @@ export default function ItemForm(props: any): ReactElement {
         title: values.title,
         description: values.description,
         price: values.price,
+        discount: values.discount,
         img: values.img,
         tags: values.tags,
       });
@@ -48,6 +50,7 @@ export default function ItemForm(props: any): ReactElement {
         description: "",
         img: "",
         price: 0,
+        discount: 0,
         tags: [],
       };
   return (
@@ -138,6 +141,23 @@ export default function ItemForm(props: any): ReactElement {
                 <Form.Control.Feedback></Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
                   {errors.price}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} md="4" controlId="validationFormik01">
+                <Form.Label>Discount</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="discount"
+                  value={values.discount}
+                  onChange={handleChange}
+                  isValid={touched.discount && !errors.discount}
+                  isInvalid={!!errors.discount}
+                />
+                <Form.Control.Feedback></Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  {errors.discount}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>

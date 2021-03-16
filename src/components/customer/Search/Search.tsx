@@ -18,8 +18,9 @@ export default function Search(): ReactElement {
   ]);
 
   return (
+    <>
+    <h1>Search</h1>
     <div className={styles.listContainer}>
-      <h1>Search</h1>
       {items.map((item: any) => (
         <Link
           to={`/info/${item._id}`}
@@ -43,5 +44,6 @@ export default function Search(): ReactElement {
         </Link>
       ))}
     </div>
+    </>
   );
 }
