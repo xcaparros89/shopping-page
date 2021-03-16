@@ -20,11 +20,11 @@
     color: white;
     background-color: rgb(39, 121, 73);
     margin: 5px;
-border-radius: 5px;
-display:flex;
-align-items:center;
-justify-content:center;
-padding: 5px;
+    border-radius: 5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 5px;
 }
 
 #title{

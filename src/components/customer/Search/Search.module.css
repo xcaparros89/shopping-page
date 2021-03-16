@@ -1,0 +1,35 @@
+.listContainer{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.itemContainer{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 5px;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    padding: 5px;
+}
+
+.itemContainer:hover{
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+.itemText{
+    background-color: #ffffff;
+    opacity: 0.6;
+    text-align: center;
+    padding: 10px;
+    color: black;
+    text-transform: capitalize;
+}
