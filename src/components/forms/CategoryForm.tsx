@@ -4,13 +4,13 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { Formik } from "formik";
 import category from "../../lib/category";
-import { CategoryValues } from "../../interfaces";
+import { CategoryValues, ResponseDB } from "../../interfaces";
 import { categorySchema } from "./validationForms";
 
 export default function CategoryForm(
-  props: any
+  {initialValues}: {initialValues : CategoryValues}
 ): ReactElement {
-  let [responseDB, setResponseDB] = useState<any>();
+  let [responseDB, setResponseDB] = useState<ResponseDB>();
   let handleCategorySubmit = async (values: CategoryValues) => {
       let response;
       if(values._id){
@@ -29,12 +29,11 @@ export default function CategoryForm(
       });
     }
     if(response.success){
-      setResponseDB({success:true, body:'Category added correctly'})
+      setResponseDB({success:true, body:values._id?'Category updated correctly':'Category added correctly'})
     }else{
       setResponseDB(response);
     }
   };
-  let initialValues = props.initialValues? props.initialValues : {title:'', description:'', discount:''};
   return (
     <Formik
       validationSchema={categorySchema}

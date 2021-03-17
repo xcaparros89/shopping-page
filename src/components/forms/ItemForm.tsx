@@ -5,9 +5,10 @@ import Col from "react-bootstrap/Col";
 import { Formik } from "formik";
 import item from "../../lib/item";
 import categoriesDB from "../../lib/category";
-import { ItemValues } from "../../interfaces";
 import { itemSchema } from "./validationForms";
-export default function ItemForm(props: any): ReactElement {
+import { ItemValues, ResponseDB } from "../../interfaces";
+
+export default function ItemForm ({initialValues}: {initialValues : ItemValues}): ReactElement {
   //----------------------------
   const fetchCategories = async () => {
     const result = await categoriesDB.findAll();
@@ -18,11 +19,11 @@ export default function ItemForm(props: any): ReactElement {
   }, []);
   let [categories, setCategories] = useState([{ title: "" }]);
   //---------------------------------
-  let [error, setError] = useState({ success: true, body: "" });
+  let [responseDB, setResponseDB] = useState<ResponseDB>();
   let handleItemSubmit = async (values: ItemValues) => {
-    let Item;
+    let response;
     if (values._id) {
-      Item = await item.update({
+      response = await item.update({
         _id: values._id,
         title: values.title,
         description: values.description,
@@ -32,7 +33,7 @@ export default function ItemForm(props: any): ReactElement {
         tags: values.tags,
       });
     } else {
-      Item = await item.create({
+      response = await item.create({
         title: values.title,
         description: values.description,
         price: values.price,
@@ -41,18 +42,12 @@ export default function ItemForm(props: any): ReactElement {
         tags: values.tags,
       });
     }
-    setError(Item);
+    if(response.success){
+      setResponseDB({success:true, body: values._id?'Item updated correctly':'Item added correctly'})
+    }else{
+      setResponseDB(response);
+    }
   };
-  let initialValues = props.initialValues
-    ? props.initialValues
-    : {
-        title: "",
-        description: "",
-        img: "",
-        price: 0,
-        discount: 0,
-        tags: [],
-      };
   return (
     <Formik
       validationSchema={itemSchema}
@@ -73,7 +68,7 @@ export default function ItemForm(props: any): ReactElement {
       }) => (
         <>
           <h2>Item creator</h2>
-          {!error.success && <p>{error.body}</p>}
+          {responseDB && <p>{responseDB.body}</p>}
           {console.log(values, "values")}
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Row>

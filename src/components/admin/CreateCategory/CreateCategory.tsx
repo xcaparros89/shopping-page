@@ -5,7 +5,7 @@ import CategoryForm from '../../forms/CategoryForm'
 function CreateCategory(): ReactElement {
     return (
         <div>
-            <CategoryForm />
+            <CategoryForm initialValues={{title:'', description:'', discount:0}}/>
             <Link to={"categoriesList"}>Return</Link>
         </div>
     )

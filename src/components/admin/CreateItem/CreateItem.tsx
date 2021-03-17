@@ -5,7 +5,7 @@ import ItemForm from '../../forms/ItemForm'
 function CreateItem(): ReactElement {
     return (
         <div>
-            <ItemForm />
+            <ItemForm initialValues={{title:'', description:'', img:'', price:0, discount:0, tags:[]}}/>
             <Link to={"itemsList"}>Return</Link>
         </div>
     )

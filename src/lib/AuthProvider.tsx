@@ -1,16 +1,17 @@
 import React, { ReactElement, useState } from "react";
+import {UserAuth} from '../interfaces'
 
 export const UserContext = React.createContext<any>(null);
 
-export function UserProvider(props: any): ReactElement {
-  const [user, setUser] = useState({
+export function UserProvider({children}:{children: JSX.Element}): ReactElement {
+  const [user, setUser] = useState<UserAuth>({
     userInfo: null,
     isCustomer: false,
     isAdmin: false,
   });
   return (
     <UserContext.Provider value={[user, setUser]}>
-      {props.children}
+      {children}
     </UserContext.Provider>
   );
 }

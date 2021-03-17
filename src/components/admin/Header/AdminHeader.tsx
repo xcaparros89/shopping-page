@@ -4,11 +4,12 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import "./navbarStyle.css";
 import { UserContext } from "../../../lib/AuthProvider";
+import {UserAuth} from '../../../interfaces'
 
 export default function AdminHeader(): ReactElement {
-  let [user, setUser] = useContext(UserContext);
+  let [user, setUser]:[user:UserAuth, setUser:React.Dispatch<React.SetStateAction<UserAuth | undefined>> ]= useContext(UserContext);
   let logout = ():void => {
-    setUser({ userInfo: null, isLogged: false, isAdmin: false });
+    setUser({ userInfo: null, isCustomer: false, isAdmin: false });
   };
   return (
     <Navbar className="basicColors" expand="lg">

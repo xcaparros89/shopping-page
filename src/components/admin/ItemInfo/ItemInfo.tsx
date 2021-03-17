@@ -1,11 +1,12 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import itemsDB from "../../../lib/item";
 import ItemForm from "../../forms/ItemForm";
-import { idType } from "../../../interfaces";
+import { ItemValues} from "../../../interfaces";
+
 
 export default function ItemInfo(): ReactElement {
-  let { id } = useParams<idType>();
+  let { id } = useParams<{id:string}>();
   useEffect(() => {
     const fetchItem = async () => {
       const result = await itemsDB.findOne("_id", id);
@@ -15,9 +16,9 @@ export default function ItemInfo(): ReactElement {
     };
     fetchItem();
   }, [id]);
-  let [item, setItem] = useState([
-    { title: "", description: "", img:"", price: 0, tags: [] },
-  ]);
+  let [item, setItem] = useState<ItemValues>(
+    { title: "", description: "", img:"", price: 0, discount:0, tags: [] },
+  );
   console.log(item);
   return (
     <div>

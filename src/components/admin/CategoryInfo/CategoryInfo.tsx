@@ -2,12 +2,12 @@ import { ReactElement, useEffect, useState, useContext} from 'react'
 import {useParams} from 'react-router-dom';
 import categoriesDB from "../../../lib/category";
 import CategoryForm from "../../forms/CategoryForm";
-import {idType} from '../../../interfaces'
+import {CategoryValues} from '../../../interfaces'
 import { Redirect } from 'react-router-dom';
 import {UserContext} from '../../../lib/AuthProvider' 
 
 export default function CategoryInfo(): ReactElement {
-    let {id} = useParams<idType>();
+    let {id} = useParams<{id:string}>();
     useEffect(()=>{
         const fetchCategory = async () => {
             const result = await categoriesDB.findOne('_id',id);
@@ -15,8 +15,8 @@ export default function CategoryInfo(): ReactElement {
           }
           fetchCategory();
         },[id])
-        let [category, setCategory] = useState([
-            {title:'', _id:'', description:'', discount:0}])
+        let [category, setCategory] = useState<CategoryValues>(
+            {title:'', _id:'', description:'', discount:0})
         let [user] = useContext(UserContext);
     return (
         <div>

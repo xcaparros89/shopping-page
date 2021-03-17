@@ -5,6 +5,7 @@ import categoriesDB from "../../../lib/category";
 import { UserContext } from "../../../lib/AuthProvider";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import { CategoryValues} from "../../../interfaces";
 
 export default function CategoriesList(): ReactElement {
   useEffect(() => {
@@ -17,23 +18,25 @@ export default function CategoriesList(): ReactElement {
     fetchCategories();
   }, []);
 
-  let [categories, setCategories] = useState<any>([
-    { title: "", _id: "", description: "", discount: "" },
+  let [categories, setCategories] = useState<CategoryValues[]>([
+    { title: "", _id: "", description: "", discount: 0 },
   ]);
   let [responseDB, setResponseDB] = useState("");
   let [user] = useContext(UserContext);
 
-  let deleteCategory = async (id: string): Promise<any> => {
+  let deleteCategory = async (id: string | undefined): Promise<void> => {
+    if(id){
     const response = await categoriesDB.delete(id);
     if (response.success) {
       setResponseDB("Category deleted");
       let newCategories = categories.filter(
-        (category: any) => category._id !== response.body._id
+        (category: CategoryValues) => category._id !== response.body._id
       );
       setCategories(newCategories);
-      console.log(response, "response");
     } else {
       setResponseDB(response.body);
+    }} else {
+      setResponseDB('Undefined Id')
     }
   };
 
@@ -47,7 +50,7 @@ export default function CategoriesList(): ReactElement {
       </Button>
       <div className={styles.listContainer}>
         {categories.length && categories[0].title ? (
-          categories.map((category: any) => (
+          categories.map((category: CategoryValues) => (
             <div key={category._id} className={styles.categoryContainer}>
               <Link to={`categoriesList/${category._id}`}>
                 <h2>{category.title}</h2>

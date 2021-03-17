@@ -17,7 +17,7 @@ export interface LoginValues {
   }
 
 export interface ItemValues {
-    _id: string | null;
+    _id?: string;
     title: string;
     description: string;
     img: string;
@@ -26,11 +26,19 @@ export interface ItemValues {
     tags: [string?];
 };
 export interface CategoryValues {
-    _id: string | null;
+    _id?: string;
     title: string;
     description: string;
     discount: number;
 };
-export interface idType {
-    id: string;
-};
+
+export interface ResponseDB{
+  success: boolean;
+  body: any;
+}
+
+export interface UserAuth{
+  userInfo: any,
+  isCustomer: boolean,
+  isAdmin: boolean,
+}

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Switch, Route } from "react-router-dom";
 import CategoriesList from "./CategoriesList";
 import CategoryInfo from "./CategoryInfo";
