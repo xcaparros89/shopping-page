@@ -5,7 +5,7 @@ import categoriesDB from "../../../lib/category";
 import { UserContext } from "../../../lib/AuthProvider";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { CategoryValues} from "../../../interfaces";
+import { CategoryValues, ResponseDB, UserAuth} from "../../../interfaces";
 
 export default function CategoriesList(): ReactElement {
   useEffect(() => {
@@ -21,29 +21,30 @@ export default function CategoriesList(): ReactElement {
   let [categories, setCategories] = useState<CategoryValues[]>([
     { title: "", _id: "", description: "", discount: 0 },
   ]);
-  let [responseDB, setResponseDB] = useState("");
-  let [user] = useContext(UserContext);
+  let [responseDB, setResponseDB] = useState<ResponseDB>({success:false, body:''});
+  let [user]:[user:UserAuth]= useContext(UserContext);
+
 
   let deleteCategory = async (id: string | undefined): Promise<void> => {
     if(id){
-    const response = await categoriesDB.delete(id);
+    const response:ResponseDB = await categoriesDB.delete(id);
     if (response.success) {
-      setResponseDB("Category deleted");
+      setResponseDB({success:true, body:"Category deleted"});
       let newCategories = categories.filter(
         (category: CategoryValues) => category._id !== response.body._id
       );
       setCategories(newCategories);
     } else {
-      setResponseDB(response.body);
+      setResponseDB(response);
     }} else {
-      setResponseDB('Undefined Id')
+      setResponseDB({success:false, body:'Error: Couldn\'t delete the category'})
     }
   };
 
   return (
     <div className={styles.componentContainer}>
       <h1 id={styles.title}>Categories</h1>
-      {responseDB && <p>{responseDB}</p>}
+      {responseDB.body && <p>{responseDB.body}</p>}
       {!user.isAdmin && <Redirect to="/admin/login"></Redirect>}
       <Button variant="success" as={Link} to={"/admin/createCategory"}>
         Create Category

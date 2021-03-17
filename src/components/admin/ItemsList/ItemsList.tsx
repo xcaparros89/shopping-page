@@ -5,12 +5,12 @@ import itemsDB from "../../../lib/item";
 import { UserContext } from "../../../lib/AuthProvider";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { ItemValues } from "../../../interfaces";
+import { ItemValues, ResponseDB, UserAuth } from "../../../interfaces";
 
 export default function ItemsList(): ReactElement {
   useEffect(() => {
     const fetchItems = async () => {
-      const result = await itemsDB.findAll();
+      const result:ResponseDB = await itemsDB.findAll();
       if (result.success) {
         setItems(result.body);
       }
@@ -29,7 +29,7 @@ export default function ItemsList(): ReactElement {
     },
   ]);
   let [responseDB, setResponseDB] = useState("");
-  let [user] = useContext(UserContext);
+  let [user]:[user:UserAuth]= useContext(UserContext);
 
   let deleteItem = async (id: string | undefined): Promise<void> => {
     if (id) {
@@ -61,7 +61,7 @@ export default function ItemsList(): ReactElement {
           items.map((item: ItemValues) => {
             return (
               <div key={item._id} className={styles.itemContainer}>
-                <Link to={`itemsList/${item._id}`}>
+                <Link to={`itemsList/info/${item._id}`}>
                   <h2>{item.title}</h2>
                 </Link>
                 <div className={styles.textImgContainer}>

@@ -9,10 +9,11 @@ import { LoginValues } from "../../interfaces";
 import { loginSchema } from "./validationForms";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../lib/AuthProvider";
+import {UserAuth } from "../../interfaces";
 
 export default function LoginForm(): ReactElement {
   let [error, setError] = useState({ success: true, body: "" });
-  let [user, setUser] = useContext(UserContext);
+  let [user, setUser]:[user:UserAuth, setUser:React.Dispatch<React.SetStateAction<UserAuth | undefined>> ]= useContext(UserContext);
 
   const initialValues: LoginValues = {
     username: "",

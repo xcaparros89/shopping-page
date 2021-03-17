@@ -1,28 +1,61 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import itemsDB from "../../../lib/item";
-import ItemForm from "../../forms/ItemForm";
-import { ItemValues} from "../../../interfaces";
-
+import { ItemValues, ResponseDB } from "../../../interfaces";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 export default function ItemInfo(): ReactElement {
-  let { id } = useParams<{id:string}>();
+  let { id } = useParams<{ id: string }>();
   useEffect(() => {
     const fetchItem = async () => {
-      const result = await itemsDB.findOne("_id", id);
-      if(result.success){
+      const result: ResponseDB = await itemsDB.findOne("_id", id);
+      if (result.success) {
         setItem(result.body);
       }
     };
     fetchItem();
   }, [id]);
-  let [item, setItem] = useState<ItemValues>(
-    { title: "", description: "", img:"", price: 0, discount:0, tags: [] },
-  );
-  console.log(item);
+
+  let [item, setItem] = useState<ItemValues>({
+    title: "",
+    description: "",
+    img: "",
+    price: 0,
+    discount: 0,
+    tags: [],
+  });
   return (
     <div>
-      <ItemForm initialValues={item} />
+      {item.title ? (
+        <>
+          <h1>{item.title}</h1>
+          <img src={item.img} alt={item.title} />
+          <p>{item.description}</p>
+          {item.discount ? (
+            <>
+              <p>Normal Price: {item.price}</p>
+              <p>
+                Discounted Price:{" "}
+                {item.price - (item.price * item.discount) / 100}
+              </p>
+              <p>Discount:{item.discount}%</p>
+            </>
+          ) : (
+            <>
+              <p>Price: {item.price}€</p>
+              <p>Discount: No</p>
+            </>
+          )}
+          <p>Categories:</p>
+          {item.tags.map((categ: string | undefined): ReactElement | null =>
+            categ ? <li>{categ}</li> : null
+          )}
+          <Button variant="success" as={Link} to={`/admin/itemsList/update/${item._id}`}>Modify</Button>
+        </>
+      ) : (
+        <p>No item found</p>
+      )}
     </div>
   );
 }

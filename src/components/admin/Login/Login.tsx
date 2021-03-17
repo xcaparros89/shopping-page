@@ -3,9 +3,10 @@ import './LoginStyle.css'
 import LoginForm from '../../forms/LoginForm';
 import { Redirect } from 'react-router-dom';
 import {UserContext} from '../../../lib/AuthProvider' 
+import {UserAuth } from "../../../interfaces";
 
 export default function Login(): ReactElement {
-  let [user] = useContext(UserContext);
+  let [user]:[user:UserAuth]= useContext(UserContext);
   return (
     <div>
       {user.isAdmin && <Redirect to='/admin/itemList'></Redirect>}      

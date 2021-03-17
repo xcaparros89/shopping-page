@@ -5,6 +5,7 @@ import CategoryForm from "../../forms/CategoryForm";
 import {CategoryValues} from '../../../interfaces'
 import { Redirect } from 'react-router-dom';
 import {UserContext} from '../../../lib/AuthProvider' 
+import {UserAuth} from "../../../interfaces";
 
 export default function CategoryInfo(): ReactElement {
     let {id} = useParams<{id:string}>();
@@ -17,7 +18,7 @@ export default function CategoryInfo(): ReactElement {
         },[id])
         let [category, setCategory] = useState<CategoryValues>(
             {title:'', _id:'', description:'', discount:0})
-        let [user] = useContext(UserContext);
+            let [user]:[user:UserAuth]= useContext(UserContext);
     return (
         <div>
             {!user.isAdmin && <Redirect to='/admin/login'></Redirect>}
