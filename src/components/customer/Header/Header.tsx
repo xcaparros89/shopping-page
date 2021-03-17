@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect, useContext } from "react";
+import { ReactElement, useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -6,38 +6,38 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
-import "./navbarStyle.css";
+import styles from "./header.module.css";
 import categoriesDB from "../../../lib/category";
 import { UserContext } from "../../../lib/AuthProvider";
+import {UserAuth} from '../../../interfaces'
 
 export default function Header(): ReactElement {
   useEffect(() => {
     const fetchCategories = async () => {
       const result = await categoriesDB.findAll();
       if (result.success) {
-        console.log(result, "result");
         setCategories(result.body);
       }
     };
     fetchCategories();
   }, []);
-  let [categories, setCategories] = useState([{ title: "" }]);
-  let [user, setUser] = useContext(UserContext);
+  let [categories, setCategories] = useState<[{title:string}]>([{ title: "" }]);
+  let [user, setUser]:[user:UserAuth, setUser:React.Dispatch<React.SetStateAction<UserAuth | undefined>> ]= useContext(UserContext);
   let logout = (): void => {
-    setUser({ userInfo: null, isLogged: false, isAdmin: false });
+    setUser({ userInfo: null, isCustomer: false, isAdmin: false });
   };
   return (
-    <Navbar className="basicColors" expand="lg">
+    <Navbar className={styles.basicColors} expand="lg">
       <Navbar.Brand as={Link} to="/">
         Xavi's garden
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" className="basicColors" />
-      <Navbar.Collapse id="basic-navbar-nav" className="basicColors">
-        <Nav className="mr-auto basicColors">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.basicColors} />
+      <Navbar.Collapse id="basic-navbar-nav" className={styles.basicColors}>
+        <Nav className={`mr-auto ${styles.basicColors}`}>
           <Nav.Link as={Link} to="/">
             Home
           </Nav.Link>
-          {user.isLogged ? (
+          {user.isCustomer || user.isAdmin ? (
             <Button onClick={logout}>Logout</Button>
           ) : (
             <Nav.Link as={Link} to="/login">
@@ -48,8 +48,8 @@ export default function Header(): ReactElement {
             Search
           </Nav.Link>
           <Dropdown>
-            <Dropdown.Toggle id="dropdown-custom">Categories</Dropdown.Toggle>
-            <Dropdown.Menu id="dropdown-custom">
+            <Dropdown.Toggle id={styles.dropdownCustom}>Categories</Dropdown.Toggle>
+            <Dropdown.Menu id={styles.dropdownCustom}>
               <Dropdown.Item
                 style={{ color: "rgba(0,0,0,.5)" }}
                 href="/search/on-sale"
