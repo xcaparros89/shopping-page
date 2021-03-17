@@ -1,11 +1,11 @@
 import { ReactElement, useState, useEffect, useContext } from "react";
 import styles from "./CategoriesList.module.css";
 import { Link } from "react-router-dom";
-import categoriesDB from "../../../lib/category";
-import { UserContext } from "../../../lib/AuthProvider";
+import categoriesDB from "../../../../lib/category";
+import { UserContext } from "../../../../lib/AuthProvider";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { CategoryValues, ResponseDB, UserAuth} from "../../../interfaces";
+import { CategoryValues, ResponseDB, UserAuth} from "../../../../interfaces";
 
 export default function CategoriesList(): ReactElement {
   useEffect(() => {
@@ -46,14 +46,14 @@ export default function CategoriesList(): ReactElement {
       <h1 id={styles.title}>Categories</h1>
       {responseDB.body && <p>{responseDB.body}</p>}
       {!user.isAdmin && <Redirect to="/admin/login"></Redirect>}
-      <Button variant="success" as={Link} to={"/admin/createCategory"}>
+      <Button variant="success" as={Link} to={"/admin/categories/create"}>
         Create Category
       </Button>
       <div className={styles.listContainer}>
         {categories.length && categories[0].title ? (
           categories.map((category: CategoryValues) => (
             <div key={category._id} className={styles.categoryContainer}>
-              <Link to={`categoriesList/${category._id}`}>
+              <Link to={`/admin/categories/info/${category._id}`}>
                 <h2>{category.title}</h2>
                 <p>
                   Discount: {category.discount ? category.discount + "%" : "no"}

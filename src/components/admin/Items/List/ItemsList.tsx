@@ -1,11 +1,11 @@
 import { ReactElement, useState, useEffect, useContext } from "react";
 import styles from "./ItemList.module.css";
 import { Link } from "react-router-dom";
-import itemsDB from "../../../lib/item";
-import { UserContext } from "../../../lib/AuthProvider";
+import itemsDB from "../../../../lib/item";
+import { UserContext } from "../../../../lib/AuthProvider";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { ItemValues, ResponseDB, UserAuth } from "../../../interfaces";
+import { ItemValues, ResponseDB, UserAuth } from "../../../../interfaces";
 
 export default function ItemsList(): ReactElement {
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function ItemsList(): ReactElement {
       <h1 id={styles.title}>Item List</h1>
       {responseDB && <p>{responseDB}</p>}
       {!user.isAdmin && <Redirect to="/admin/login"></Redirect>}
-      <Button variant="success" as={Link} to="/admin/createItem">
+      <Button variant="success" as={Link} to="/admin/items/create">
         Create new Item
       </Button>
       <div className={styles.listContainer}>
@@ -61,7 +61,7 @@ export default function ItemsList(): ReactElement {
           items.map((item: ItemValues) => {
             return (
               <div key={item._id} className={styles.itemContainer}>
-                <Link to={`itemsList/info/${item._id}`}>
+                <Link to={`/admin/items/info/${item._id}`}>
                   <h2>{item.title}</h2>
                 </Link>
                 <div className={styles.textImgContainer}>

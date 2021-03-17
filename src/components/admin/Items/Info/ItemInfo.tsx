@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import itemsDB from "../../../lib/item";
-import { ItemValues, ResponseDB } from "../../../interfaces";
+import itemsDB from "../../../../lib/item";
+import { ItemValues, ResponseDB } from "../../../../interfaces";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
@@ -51,7 +51,8 @@ export default function ItemInfo(): ReactElement {
           {item.tags.map((categ: string | undefined): ReactElement | null =>
             categ ? <li>{categ}</li> : null
           )}
-          <Button variant="success" as={Link} to={`/admin/itemsList/update/${item._id}`}>Modify</Button>
+          <Button variant="success" as={Link} to={`/admin/items/update/${item._id}`}>Modify</Button>
+          <Button variant="success" as={Link} to={`/admin/items/list`}>Return</Button>
         </>
       ) : (
         <p>No item found</p>

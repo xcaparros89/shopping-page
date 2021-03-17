@@ -9,7 +9,7 @@ export default function Login(): ReactElement {
   let [user]:[user:UserAuth]= useContext(UserContext);
   return (
     <div>
-      {user.isAdmin && <Redirect to='/admin/itemList'></Redirect>}      
+      {user.isAdmin && <Redirect to='/admin/items/list'></Redirect>}      
       <LoginForm />
     </div>
   );

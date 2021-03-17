@@ -1,9 +1,9 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import itemsDB from "../../../lib/item";
-import ItemForm from "../../forms/ItemForm";
-import {ResponseDB} from "../../../interfaces";
-
+import itemsDB from "../../../../lib/item";
+import ItemForm from "../../../forms/ItemForm";
+import {ResponseDB} from "../../../../interfaces";
+import { Link } from "react-router-dom";
 
 export default function ItemInfo(): ReactElement {
   let { id } = useParams<{id:string}>();
@@ -21,6 +21,7 @@ export default function ItemInfo(): ReactElement {
       <ItemForm initialValues={responseDB.body} />
       : <p>Error, item not found</p>
     }
+    <Link to={"/admin/items/list"}>Return</Link>
     </div>
   );
 }

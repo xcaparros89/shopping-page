@@ -1,13 +1,14 @@
 import { ReactElement } from "react";
 import { Switch, Route } from "react-router-dom";
-import CategoriesList from "./CategoriesList";
-import CategoryInfo from "./CategoryInfo";
-import ItemsList from "./ItemsList";
-import ItemUpdate from "./ItemUpdate";
-import ItemInfo from "./ItemInfo";
+import CategoriesList from "./Categories/List";
+import CategoryInfo from "./Categories/Info";
+import CategoryUpdate from "./Categories/Update";
+import CreateCategory from "./Categories/Create";
+import ItemsList from "./Items/List";
+import ItemUpdate from "./Items/Update";
+import ItemInfo from "./Items/Info";
+import createItem from "./Items/Create";
 import AdminLogin from "./Login";
-import CreateCategory from "./CreateCategory";
-import createItem from "./CreateItem";
 import AdminHeader from "./Header/AdminHeader";
 import Footer from "../customer/Footer";
 
@@ -19,13 +20,16 @@ export default function Admin(): ReactElement {
         <Switch>
           <Route exact path="/admin/" component={AdminLogin} />
           <Route exact path="/admin/login" component={AdminLogin} />
-          <Route exact path="/admin/itemsList" component={ItemsList} />
-          <Route exact path="/admin/itemsList/update/:id" component={ItemUpdate} />
-          <Route exact path="/admin/itemsList/info/:id" component={ItemInfo} />
-          <Route exact path="/admin/createItem" component={createItem} />
-          <Route exact path="/admin/categoriesList" component={CategoriesList} />
-          <Route exact path="/admin/categoriesList/:id" component={CategoryInfo} />
-          <Route exact path="/admin/createCategory" component={CreateCategory} />
+          <Route exact path="/admin/items/" component={ItemsList} />
+          <Route exact path="/admin/items/list" component={ItemsList} />
+          <Route exact path="/admin/items/update/:id" component={ItemUpdate} />
+          <Route exact path="/admin/items/info/:id" component={ItemInfo} />
+          <Route exact path="/admin/items/create" component={createItem} />
+          <Route exact path="/admin/categories/" component={CategoriesList} />
+          <Route exact path="/admin/categories/list" component={CategoriesList} />
+          <Route exact path="/admin/categories/update/:id" component={CategoryUpdate} />
+          <Route exact path="/admin/categories/info/:id" component={CategoryInfo} />
+          <Route exact path="/admin/categories/create" component={CreateCategory} />
         </Switch>
       }
       <Footer />

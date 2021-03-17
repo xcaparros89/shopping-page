@@ -19,10 +19,10 @@ export default function AdminHeader(): ReactElement {
       <Navbar.Toggle aria-controls="basic-navbar-nav" className="basicColors" />
       <Navbar.Collapse id="basic-navbar-nav" className="basicColors">
         <Nav className="mr-auto basicColors">
-          <Nav.Link as={Link} to="/admin/itemsList">
+          <Nav.Link as={Link} to="/admin/items">
             Items List
           </Nav.Link>
-          <Nav.Link as={Link} to="/admin/categoriesList">
+          <Nav.Link as={Link} to="/admin/categories">
             Category List
           </Nav.Link>
           {/* <Nav.Link as={Link} to="#">
