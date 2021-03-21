@@ -12,7 +12,7 @@ export default function CategoryForm(
 ): ReactElement {
   let [responseDB, setResponseDB] = useState<ResponseDB>();
   let handleCategorySubmit = async (values: CategoryValues) => {
-      let response;
+      let response:ResponseDB;
       if(values._id){
         console.log('valuesId', values)
         response = await category.update({

@@ -1,14 +1,17 @@
-import React, { ReactElement, useState } from 'react';
+import { ReactElement, useState, useContext } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { Formik } from "formik";
 import auth from "../../lib/auth";
-import {RegisterValues} from '../../interfaces';
+import {RegisterValues, ResponseDB, UserAuth} from '../../interfaces';
 import {registerSchema} from './validationForms';
+import { UserContext } from "../../lib/AuthProvider";
+import { Redirect } from "react-router-dom";
 
 export default function RegisterForm(): ReactElement {
-    let [error, setError] = useState({success:true, body:''})
+  let [responseDB, setResponseDB] = useState<ResponseDB>();
+  let [user, setUser]:[user:UserAuth, setUser:React.Dispatch<React.SetStateAction<UserAuth | undefined>> ]= useContext(UserContext);
             const initialValues: RegisterValues = {
               name: "",
               surnames: "",
@@ -24,7 +27,7 @@ export default function RegisterForm(): ReactElement {
             };
             let handleRegisterSubmit = async (values: RegisterValues) => {
               console.log(values);
-              const register = await auth.signup({
+              const register:ResponseDB = await auth.signup({
                 name: values.name,
                 surnames: values.surnames,
                 username: values.username,
@@ -35,8 +38,16 @@ export default function RegisterForm(): ReactElement {
                 state: values.state,
                 zip: values.zip,
               });
-              setError(register);
+              setResponseDB(register);
+              if (register.success) {
+                if (register.body.isAdmin) {
+                  setUser({ userInfo: register.body, isCustomer:false, isAdmin: true });
+                } else {
+                  setUser({ userInfo: register.body, isCustomer: true, isAdmin: false });
+                }
             };
+
+          }
             return (
               <Formik
                 validationSchema={registerSchema}
@@ -56,8 +67,9 @@ export default function RegisterForm(): ReactElement {
                 }) => (
                   <>
                     <h2>Register</h2>
-                    {!error.success && 
-                        <p>{error.body}</p>
+                    {responseDB && (responseDB.success?
+                        <Redirect to="/"></Redirect>:
+                        <p>{responseDB.body}</p>)
                     }
                     <Form noValidate onSubmit={handleSubmit}>
                       <Form.Row>

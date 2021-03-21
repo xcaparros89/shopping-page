@@ -9,7 +9,7 @@ import { LoginValues } from "../../interfaces";
 import { loginSchema } from "./validationForms";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../lib/AuthProvider";
-import {UserAuth } from "../../interfaces";
+import {UserAuth, ResponseDB } from "../../interfaces";
 
 export default function LoginForm(): ReactElement {
   let [error, setError] = useState({ success: true, body: "" });
@@ -21,7 +21,7 @@ export default function LoginForm(): ReactElement {
   };
   let handleRegisterSubmit = async (values: LoginValues) => {
     console.log(values);
-    let login = await auth.login({
+    let login:ResponseDB = await auth.login({
       username: values.username,
       password: values.password,
     });

@@ -11,17 +11,17 @@ import { ItemValues, ResponseDB } from "../../interfaces";
 export default function ItemForm ({initialValues}: {initialValues : ItemValues}): ReactElement {
   //----------------------------
   const fetchCategories = async () => {
-    const result = await categoriesDB.findAll();
+    const result:ResponseDB = await categoriesDB.findAll();
     setCategories(result.body);
   };
   useEffect(() => {
     fetchCategories();
   }, []);
-  let [categories, setCategories] = useState([{ title: "" }]);
+  let [categories, setCategories] = useState<[ItemValues]>([{ title: "", description:"", img:"", price:0, discount:0, tags:[] }]);
   //---------------------------------
   let [responseDB, setResponseDB] = useState<ResponseDB>();
   let handleItemSubmit = async (values: ItemValues) => {
-    let response;
+    let response:ResponseDB;
     if (values._id) {
       response = await item.update({
         _id: values._id,
