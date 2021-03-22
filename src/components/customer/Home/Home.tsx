@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import styles from "./Home.module.css";
 import Slideshow from "../Slideshow";
-import Other from '../../utils/other';
 import Button from "react-bootstrap/Button";
 
 export default function Home(): ReactElement {

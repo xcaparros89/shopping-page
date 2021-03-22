@@ -22,6 +22,7 @@ export default function Header(): ReactElement {
     fetchCategories();
   }, []);
   let [categories, setCategories] = useState<[{title:string}]>([{ title: "" }]);
+  console.log(useContext(UserContext), 'usecontext')
   let [user, setUser]:[user:UserAuth, setUser:React.Dispatch<React.SetStateAction<UserAuth | undefined>> ]= useContext(UserContext);
   let logout = (): void => {
     setUser({ userInfo: null, isCustomer: false, isAdmin: false });
