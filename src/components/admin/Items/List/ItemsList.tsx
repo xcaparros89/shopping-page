@@ -6,6 +6,7 @@ import { UserContext } from "../../../../lib/AuthProvider";
 import { Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { ItemValues, ResponseDB, UserAuth } from "../../../../interfaces";
+import {applyDiscount} from '../../../utils/functions';
 
 export default function ItemsList(): ReactElement {
   useEffect(() => {
@@ -66,10 +67,22 @@ export default function ItemsList(): ReactElement {
                 </Link>
                 <div className={styles.textImgContainer}>
                   <div>
-                    <p>Price: {item.price}€</p>
-                    <p>
-                      Discount: {item.discount ? item.discount + "%" : "no"}
-                    </p>
+                  {item.discount ? (
+            <>
+                <p style={{ textDecoration: "line-through" }}>
+                Normal Price: {item.price}€
+                </p>
+              <p>
+                Discounted Price: {applyDiscount(item.price, item.discount)}€
+              </p>
+              <p>Discount:{item.discount}%</p>
+            </>
+          ) : (
+            <>
+              <p>Price: {item.price}€</p>
+              <p>Discount: No</p>
+            </>
+          )}
                   </div>
                   <div className={styles.imgContainer}>
                     <img src={item.img} alt={item.title} />

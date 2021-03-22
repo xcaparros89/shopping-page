@@ -4,6 +4,7 @@ import itemsDB from "../../../../lib/item";
 import { ItemValues, ResponseDB } from "../../../../interfaces";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { applyDiscount } from "../../../utils/functions";
 
 export default function ItemInfo(): ReactElement {
   let { id } = useParams<{ id: string }>();
@@ -34,10 +35,11 @@ export default function ItemInfo(): ReactElement {
           <p>{item.description}</p>
           {item.discount ? (
             <>
-              <p>Normal Price: {item.price}</p>
+                <p style={{ textDecoration: "line-through" }}>
+                Normal Price: {item.price}€
+                </p>
               <p>
-                Discounted Price:{" "}
-                {item.price - (item.price * item.discount) / 100}
+                Discounted Price: {applyDiscount(item.price, item.discount)}€
               </p>
               <p>Discount:{item.discount}%</p>
             </>
@@ -51,8 +53,16 @@ export default function ItemInfo(): ReactElement {
           {item.tags.map((categ: string | undefined): ReactElement | null =>
             categ ? <li>{categ}</li> : null
           )}
-          <Button variant="success" as={Link} to={`/admin/items/update/${item._id}`}>Modify</Button>
-          <Button variant="success" as={Link} to={`/admin/items/list`}>Return</Button>
+          <Button
+            variant="success"
+            as={Link}
+            to={`/admin/items/update/${item._id}`}
+          >
+            Modify
+          </Button>
+          <Button variant="success" as={Link} to={`/admin/items/list`}>
+            Return
+          </Button>
         </>
       ) : (
         <p>No item found</p>
